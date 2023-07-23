@@ -1,0 +1,31 @@
+{
+  "extends": "next/core-web-vitals",
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2021
+  },
+  "rules": {
+    "indent": ["error", 2], 
+    "linebreak-style": ["error", "unix"], 
+    "quotes": ["error", "single"], 
+    "semi": ["error", "always"], 
+    "no-unused-vars": "error", 
+    "no-console": "warn", 
+    "no-alert": "error", 
+    "no-debugger": "error", 
+    "no-var": "error", 
+    "prefer-const": "error", 
+    "eqeqeq": "error", 
+    "no-extra-semi": "error", 
+    "no-multi-spaces": "error", 
+    "max-len": ["error", { "code": 150 }], 
+    "max-lines": ["error", { "max": 300 }], 
+    "max-nested-callbacks": ["error", { "max": 3 }], 
+    "max-params": ["error", { "max": 3 }], 
+    "max-depth": ["error", { "max": 4 }] 
+  }
+}

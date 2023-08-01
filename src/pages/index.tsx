@@ -1,6 +1,7 @@
+import DateCalender from '../components/dateCalender';
+
 export default function Home() {
-  return (
-    <>
-    </>
-  );
+  return <div>
+    <DateCalender />
+  </div>;
 }

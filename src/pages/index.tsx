@@ -1,7 +1,9 @@
-import DateCalender from '../components/dateCalender';
+import BackGround from '@/components/Background';
 
 export default function Home() {
-  return <div>
-    <DateCalender />
-  </div>;
+  return (
+    <>
+      <BackGround />
+    </>
+  );
 }

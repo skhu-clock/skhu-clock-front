@@ -1,8 +1,8 @@
 import type { AppProps } from 'next/app';
 import '../styles/index.css';
-import { ThemeProvider, createTheme } from '@mui/system';
+import { ThemeProvider,} from '@mui/system';
+import theme from '@/styles/theme';
 
-const theme = createTheme();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

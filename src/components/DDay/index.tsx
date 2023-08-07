@@ -67,7 +67,7 @@ const DateCalender = () => {
           />
         </div>
       </div>
-      <div id='D-day'>D-{dateDiff}</div>
+      <div id="D-day">D-{dateDiff}</div>
     </div>
   );
 };
@@ -94,7 +94,7 @@ const calenderContaner = css`
   input {
     text-align: center;
   }
-  div#D-day{
+  div#D-day {
     font-size: 3rem;
   }
 `;

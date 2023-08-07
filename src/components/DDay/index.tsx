@@ -21,7 +21,7 @@ const DateCalender = () => {
     const dateDiff = dateend - datenow;
 
     if (dateDiff === 0) {
-      return 'D-day';
+      return 'day';
     } else {
       return Math.abs(dateDiff / (1000 * 60 * 60 * 24));
     }

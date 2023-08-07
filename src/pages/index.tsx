@@ -1,9 +1,9 @@
-import BackGround from '@/components/Background';
+import DateCalender from '@/components/DDay';
 
 export default function Home() {
   return (
     <>
-      <BackGround />
+      <DateCalender />
     </>
   );
 }

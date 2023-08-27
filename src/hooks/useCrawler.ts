@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 import type { CrawlerAPi } from '@/types/index';
 
 export const useCrawlerAPi = () => {
-  const [crawlData, setCrawlData] = useState<CrawlerAPi | null>(null);
+  const [crawlData, setCrawlData] = useState<CrawlerAPi[] | null>(null);
 
   useEffect(() => {
     const fetchCrawlData = async () => {
-      const res = await Instance.get('/api/crawling');
+      const res = await Instance.get('/api/notice');
       setCrawlData(res.data);
     };
 

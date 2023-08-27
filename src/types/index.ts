@@ -1,3 +1,5 @@
+import { CSSProperties } from 'react';
+
 export type WeatherApi = {
   temp: string;
   precipitation: string;
@@ -17,7 +19,7 @@ export type SubWayAPi = {
 };
 
 export type CrawlerAPi = {
-  articleName: string;
+  articleNum: string;
   number: string;
   status: string;
   title: string;
@@ -25,4 +27,10 @@ export type CrawlerAPi = {
   author: string;
   views: number;
   url: string;
+};
+
+export type ListProps<T> = {
+  items: T[];
+  renderItem: (item: T) => React.ReactNode;
+  listStyle?: CSSProperties;
 };

@@ -1,5 +1,7 @@
 import DateCalender from '@/components/DDay';
 import BaseItem from '@/components/BaseItem';
+import NoticeList from '@/components/NoticeList';
+
 export default function Home() {
   return (
     <div
@@ -10,19 +12,7 @@ export default function Home() {
         maxWidth: '80%',
       }}
     >
-      <BaseItem
-        title="하이"
-        subtitle="하하"
-        innerContent={
-          <div
-            style={{
-              background: 'white',
-            }}
-          >
-            학사공지 리스트
-          </div>
-        }
-      />
+      <BaseItem title="하이" subtitle="하하" innerContent={<NoticeList />} />
       <DateCalender />
     </div>
   );

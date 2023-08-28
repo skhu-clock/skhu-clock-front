@@ -1,7 +1,6 @@
 import DateCalender from '@/components/DDay';
 import BaseItem from '@/components/BaseItem';
 import NoticeList from '@/components/NoticeList';
-import SubwayList from '@/components/SubWayList';
 
 export default function Home() {
   return (

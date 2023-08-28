@@ -4,9 +4,14 @@ import List from '../Common/List';
 import Skeleton from '../Common/Skeleton';
 import { useCrawlerAPi } from '@/hooks/useCrawler';
 import { useState } from 'react';
+import { Link } from '@/components/SubWayList/index';
 
 const renderNotice = (item: CrawlerAPi) => {
-  return <div>{item.title}</div>;
+  return (
+    <div>
+      <Link href={item.url}>{item.title}</Link>
+    </div>
+  );
 };
 
 const NoticeWrapper = styled.div`
@@ -36,9 +41,10 @@ const NoticeList = () => {
             items={crawlData?.slice(initPage, initPage + 5) || []}
             listStyle={{
               width: '350px',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '15px',
+              flexDirection: 'column',
             }}
           />
 

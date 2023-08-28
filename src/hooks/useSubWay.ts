@@ -1,4 +1,3 @@
-import Instance from '@/constants';
 import { useState, useEffect } from 'react';
 import type { SubWayAPi } from '@/types/index';
 
@@ -7,8 +6,10 @@ export const useSubwayAPi = () => {
 
   useEffect(() => {
     const fetchSubwayData = async () => {
-      const res = await Instance.get('/api/subway');
-      setSubway(res.data);
+      const res = await fetch('/api/subway');
+      if (res.ok) {
+        setSubway(await res.json());
+      }
     };
 
     fetchSubwayData();

@@ -9,13 +9,16 @@ export type WeatherApi = {
 };
 
 export type SubWayAPi = {
-  subwayId: number;
-  updnLine: string;
-  trainLineNm: string;
-  statnNm: string;
-  arvlMsg2: string;
-  arvlMsg3: string;
-  arvlCd: number;
+  subway: {
+    subwayId: number;
+    updnLine: string;
+    trainLineNm: string;
+    statnNm: string;
+    arvlMsg1: string;
+    arvlMsg2: string;
+    arvlMsg3: string;
+    arvlCd: number;
+  };
 };
 
 export type CrawlerAPi = {

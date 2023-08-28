@@ -1,6 +1,7 @@
 import DateCalender from '@/components/DDay';
 import BaseItem from '@/components/BaseItem';
 import NoticeList from '@/components/NoticeList';
+import SubwayList from '@/components/SubWayList';
 
 export default function Home() {
   return (
@@ -18,6 +19,8 @@ export default function Home() {
       최근 올라온 15개의 학사공지를 보여드립니다."
         innerContent={<NoticeList />}
       />
+
+      <BaseItem title="다음지하철" subtitle="" innerContent={<SubwayList />} />
       <DateCalender />
     </div>
   );

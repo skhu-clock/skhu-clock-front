@@ -1,13 +1,15 @@
 import styled from '@emotion/styled';
 import type { SubWayAPi } from '@/types';
-import List from '../Common/List';
+import ApiList from '../Domain/ApiList';
 import { useSubwayAPi } from '@/hooks/useSubWay';
-import { useState } from 'react';
-
-const renderNotice = (item: SubWayAPi) => {
+import Image from 'next/image';
+const renderSubWay = (item: SubWayAPi) => {
   return (
     <div>
-      <Link>{item.arvlCd}</Link>
+      <Image src="/subway.png" width={30} height={30} alt="지하철 이미지" />
+      <div>노선 : {item.subway.trainLineNm}</div>
+      <div>방향 : {item.subway.updnLine}</div>
+      <div>상태 : {item.subway.arvlMsg1}</div>
     </div>
   );
 };
@@ -22,42 +24,11 @@ export const Link = styled.a`
   }
 `;
 
-const NoticeWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-`;
 const SubwayList = () => {
   const { subway } = useSubwayAPi();
-  const [initPage, setPage] = useState<number>(0);
-
-  const handleClickNextPage = () => {
-    if (initPage + 5 <= 15) setPage(initPage + 5);
-  };
-
-  const handleClickPrevPage = () => {
-    if (initPage - 5 < 0) setPage(initPage - 5);
-  };
   return (
     <>
-      <NoticeWrapper>
-        <List
-          renderItem={renderNotice}
-          items={subway || []}
-          listStyle={{
-            width: '350px',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-          }}
-        />
-
-        <div>
-          <button onClick={handleClickPrevPage}>이전</button>
-          {initPage / 5 + 1}
-          <button onClick={handleClickNextPage}>이후</button>
-        </div>
-      </NoticeWrapper>
+      <ApiList renderItem={renderSubWay} items={subway || []} />
     </>
   );
 };

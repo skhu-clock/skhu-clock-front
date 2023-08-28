@@ -14,10 +14,11 @@ export default function BaseItem({
     fontStyle: 'normal',
     width: '480px',
     display: 'flex',
+    justifyContent: 'space-around',
     flexDirection: 'column',
     minHeight: '272px',
-    backgroundColor: '#d4d4d4',
-    color: 'rgb(116, 116, 116);',
+    backgroundColor: 'rgba(255,255,255,0.56)',
+    color: 'black',
   };
 
   const h1Style: CSSProperties = {
@@ -34,12 +35,12 @@ export default function BaseItem({
   };
 
   const innerContentDiv: CSSProperties = {
-    width: '80%',
-    background: 'white',
+    background: 'rgba(255,255,255,0.8)',
     display: 'flex',
+    width: '95%',
     margin: '20px auto',
-    padding: '0px 2rem',
     borderRadius: '1rem',
+    justifyContent: 'center',
     flex: 1,
   };
 

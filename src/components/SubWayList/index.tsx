@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import type { SubWayAPi } from '@/types';
 import ApiList from '../Domain/ApiList';
+import { useState } from 'react';
 import { useSubwayAPi } from '@/hooks/useSubWay';
 import Image from 'next/image';
 const renderSubWay = (item: SubWayAPi) => {
@@ -26,9 +27,30 @@ export const Link = styled.a`
 
 const SubwayList = () => {
   const { subway } = useSubwayAPi();
+  const [page, setPage] = useState<number>(0);
+
   return (
     <>
-      <ApiList renderItem={renderSubWay} items={subway || []} />
+      <ApiList
+        renderItem={renderSubWay}
+        items={subway?.slice(page, page + 2) || []}
+      />
+      <div>
+        <button
+          onClick={() => {
+            setPage(page - 1);
+          }}
+        >
+          이전
+        </button>
+        <button
+          onClick={() => {
+            setPage(page + 1);
+          }}
+        >
+          다음
+        </button>
+      </div>
     </>
   );
 };

@@ -3,6 +3,7 @@ import type { SubWayAPi } from '@/types/index';
 
 export const useSubwayAPi = () => {
   const [subway, setSubway] = useState<SubWayAPi[] | null>(null);
+  const [totalResult, setTotalResult] = useState<number>(0);
 
   useEffect(() => {
     const fetchSubwayData = async () => {
@@ -12,8 +13,10 @@ export const useSubwayAPi = () => {
       }
     };
 
-    fetchSubwayData();
+    fetchSubwayData().then(() => {
+      if (subway) setTotalResult(subway?.length);
+    });
   }, []);
 
-  return { subway };
+  return { subway, totalResult };
 };

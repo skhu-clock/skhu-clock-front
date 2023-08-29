@@ -1,4 +1,3 @@
-import Instance from '@/constants';
 import { NextRequest } from 'next/server';
 
 const getFetchSubway = async () => {

@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import type { SubWayAPi } from '@/types/index';
 
-export const useSubwayAPi = () => {
+export const useSubwayAPi = (flag?: boolean) => {
   const [subway, setSubway] = useState<SubWayAPi[] | null>(null);
   const [totalResult, setTotalResult] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchSubwayData = async () => {
       const res = await fetch('/api/subway');
       if (res.ok) {
@@ -13,10 +15,12 @@ export const useSubwayAPi = () => {
       }
     };
 
-    fetchSubwayData().then(() => {
-      if (subway) setTotalResult(subway?.length);
-    });
-  }, []);
+    fetchSubwayData()
+      .then(() => {
+        if (subway) setTotalResult(subway?.length);
+      })
+      .finally(() => setIsLoading(false));
+  }, [flag]);
 
-  return { subway, totalResult };
+  return { subway, totalResult, isLoading };
 };

@@ -28,7 +28,7 @@ const NoticeList = () => {
   return (
     <>
       {isLoading ? (
-        <Skeleton.Box width={465} height={228} />
+        <Skeleton.Box width={450} height={180} />
       ) : (
         <>
           <ApiList

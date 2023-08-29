@@ -25,12 +25,12 @@ export default function BaseItem({
     backgroundColor: 'white',
     color: 'black',
     fontWeight: '700',
-    fontSize: '1.2rem',
+    fontSize: '1.4rem',
     paddingLeft: '8px',
   };
 
   const h2Style: CSSProperties = {
-    fontSize: '1rem',
+    fontSize: '1.2rem',
     padding: '10px',
   };
 

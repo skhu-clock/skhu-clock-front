@@ -1,8 +1,17 @@
 import styled from '@emotion/styled';
 import type { SubWayAPi } from '@/types';
 import ApiList from '../Domain/ApiList';
-import { useState } from 'react';
 import Image from 'next/image';
+import { useSubwayAPi } from '@/hooks/useSubWay';
+import { useState } from 'react';
+import Skeleton from '../Common/Skeleton';
+
+const ButtonLists = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+`;
 const renderSubWay = (item: SubWayAPi) => {
   return (
     <div>
@@ -24,31 +33,55 @@ export const Link = styled.a`
   }
 `;
 
-const SubwayList = ({ subwayList }: { subwayList: SubWayAPi[] }) => {
+const SubwayList = () => {
   const [page, setPage] = useState<number>(0);
+  const [fetchFlag, setFetchFlag] = useState<boolean>(false);
+  const { subway, isLoading } = useSubwayAPi(fetchFlag);
+
+  const handleClickFetchButton = () => {
+    setFetchFlag(!fetchFlag);
+  };
 
   return (
     <>
-      <ApiList
-        renderItem={renderSubWay}
-        items={subwayList?.slice(page, page + 2) || []}
-      />
-      <div>
-        <button
-          onClick={() => {
-            setPage(page - 1);
-          }}
-        >
-          이전
-        </button>
-        <button
-          onClick={() => {
-            setPage(page + 1);
-          }}
-        >
-          다음
-        </button>
-      </div>
+      {isLoading && <Skeleton.Box width={450} height={180} />}
+
+      {!isLoading && (
+        <>
+          <ApiList
+            renderItem={renderSubWay}
+            items={subway?.slice(page, page + 2) || []}
+          />
+
+          <ButtonLists>
+            <Image
+              onClick={handleClickFetchButton}
+              src="/reload.png"
+              style={{
+                cursor: 'pointer',
+              }}
+              alt="다시로드하는 이미지"
+              width={30}
+              height={30}
+            />
+
+            <button
+              onClick={() => {
+                setPage(page - 1);
+              }}
+            >
+              이전
+            </button>
+            <button
+              onClick={() => {
+                setPage(page + 1);
+              }}
+            >
+              다음
+            </button>
+          </ButtonLists>
+        </>
+      )}
     </>
   );
 };

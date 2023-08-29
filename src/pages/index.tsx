@@ -7,13 +7,13 @@ import Instance from '@/constants';
 
 export const getStaticProps = async () => {
   const res = await Instance.get('/api/subway');
-  console.log('revalidate');
+
   if (res) {
     return {
       props: {
         subwayData: await res.data,
       },
-      revalidate: 60,
+      revalidate: 10,
     };
   }
 };

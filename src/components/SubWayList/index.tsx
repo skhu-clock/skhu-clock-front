@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import type { SubWayAPi } from '@/types';
 import ApiList from '../Domain/ApiList';
 import { useState } from 'react';
-import { useSubwayAPi } from '@/hooks/useSubWay';
 import Image from 'next/image';
 const renderSubWay = (item: SubWayAPi) => {
   return (
@@ -25,15 +24,14 @@ export const Link = styled.a`
   }
 `;
 
-const SubwayList = () => {
-  const { subway } = useSubwayAPi();
+const SubwayList = ({ subwayList }: { subwayList: SubWayAPi[] }) => {
   const [page, setPage] = useState<number>(0);
 
   return (
     <>
       <ApiList
         renderItem={renderSubWay}
-        items={subway?.slice(page, page + 2) || []}
+        items={subwayList?.slice(page, page + 2) || []}
       />
       <div>
         <button

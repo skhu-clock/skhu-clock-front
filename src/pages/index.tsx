@@ -2,8 +2,23 @@ import DateCalender from '@/components/DDay';
 import BaseItem from '@/components/BaseItem';
 import NoticeList from '@/components/NoticeList';
 import SubwayList from '@/components/SubWayList';
+import { SubWayAPi } from '@/types';
+import Instance from '@/constants';
 
-export default function Home() {
+export const getStaticProps = async () => {
+  const res = await Instance.get('/api/subway');
+  console.log('revalidate');
+  if (res) {
+    return {
+      props: {
+        subwayData: await res.data,
+      },
+      revalidate: 60,
+    };
+  }
+};
+
+export default function Home({ subwayData }: { subwayData: SubWayAPi[] }) {
   return (
     <div
       style={{
@@ -20,7 +35,11 @@ export default function Home() {
         innerContent={<NoticeList />}
       />
 
-      <BaseItem title="다음지하철" subtitle="" innerContent={<SubwayList />} />
+      <BaseItem
+        title="다음지하철"
+        subtitle=""
+        innerContent={<SubwayList subwayList={subwayData} />}
+      />
       <DateCalender />
     </div>
   );

@@ -1,4 +1,11 @@
-import { CSSProperties } from 'react';
+import { CSSProperties, ComponentProps } from 'react';
+
+export type ButtonProps = ComponentProps<'button'> & {
+  primary?: 'primary' | 'secondary' | 'danger';
+  round?: boolean;
+  disabled?: boolean;
+  outlined?: boolean;
+};
 
 export type WeatherApi = {
   temp: string;
@@ -36,4 +43,9 @@ export type ListProps<T> = {
   items: T[];
   renderItem: (item: T) => React.ReactNode;
   listStyle?: CSSProperties;
+};
+
+export type Schedule = {
+  date: string;
+  txt: string;
 };

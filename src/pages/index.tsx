@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import BaseItem from '@/components/BaseItem';
-import DateCalendar from '@/components/DDay';
-import NoticeList from '@/components/NoticeList';
-import SubwayList from '@/components/SubWayList';
-import ScheduleList from '@/components/ScheduleList';
-import BaseCalendar from '@/components/Calendar';
+import {
+  BaseItem,
+  BaseCalendar,
+  NoticeList,
+  SubwayList,
+  WeatherList,
+  Avatar,
+} from '@/components';
+
+import calcuateDateDIff from '@/utils/calculateDateDiff';
 import type { Schedule } from '@/types';
 
 export const getStaticProps = async () => {
   const res = await fetch('http://skhuclock.duckdns.org/api/schedule');
   if (res.ok) {
-    const data = await res.json();
-    return { props: { data } };
+    const data = (await res.json()) as Schedule[];
+    const endDate = data.filter((eachData) =>
+      eachData.txt.includes('2학기 종강일')
+    );
+    const parseDate = endDate[0].date.match(/\d+/g)?.join(',');
+    return { props: { data, endDate: parseDate } };
   }
 };
 
-export default function Home({ data }: { data: Schedule[] }) {
-  const endSemester = data.filter((eachData) =>
-    eachData.txt.includes('2학기 종강일,')
-  );
-
-  const endDate = endSemester[0].date;
-
+export default function Home({ endDate }: { endDate: string | null }) {
   const fadeInAnimation = {
     animation: 'fadeIn 1s linear',
     '@keyframes fadeIn': {
@@ -49,7 +51,7 @@ export default function Home({ data }: { data: Schedule[] }) {
   return (
     <>
       <h2 style={{ fontSize: '3rem', fontWeight: '700' }}>
-        다음 종강일 : {endDate}
+        종강일 남은 기간 : {calcuateDateDIff(endDate || '') + '일'}
       </h2>
       <br />
       {curPage === false && (
@@ -73,12 +75,17 @@ export default function Home({ data }: { data: Schedule[] }) {
             subtitle="지하철을 확인할 수 있습니다."
             innerContent={<SubwayList />}
           />
-          <BaseItem title="" subtitle="" innerContent={<ScheduleList />} />
-          <DateCalendar />
+          <BaseItem title="" subtitle="" innerContent={<WeatherList />} />
+          <BaseCalendar />
         </div>
       )}
 
-      {curPage && <BaseCalendar />}
+      {curPage && (
+        <>
+          <Avatar src="/subway.png" size={50} alt="아바타" />
+          <BaseCalendar />
+        </>
+      )}
     </>
   );
 }

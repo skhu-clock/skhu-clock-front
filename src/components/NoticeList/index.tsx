@@ -4,12 +4,27 @@ import ApiList from '../Domain/ApiList';
 import Skeleton from '../Common/Skeleton';
 import { useCrawlerAPi } from '@/hooks/useCrawler';
 import { useState } from 'react';
-import { Link } from '@/components/SubWayList/index';
+
+const NoticeLinkStyle = styled.a`
+  width: 320px;
+  padding: 0 5px;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+    color: '#e1e1e1';
+  }
+`;
 
 const renderNotice = (item: CrawlerAPi) => {
   return (
     <div>
-      <Link href={item.url}>{item.title}</Link>
+      <NoticeLinkStyle href={item.url}>{item.title}</NoticeLinkStyle>
     </div>
   );
 };

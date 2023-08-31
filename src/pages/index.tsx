@@ -18,7 +18,8 @@ export const getStaticProps = async () => {
     const endDate = data.filter((eachData) =>
       eachData.txt.includes('2학기 종강일')
     );
-    const parseDate = endDate[0].date.match(/\d+/g)?.join(',');
+    const parseDate = endDate[0].date.match(/\d+/g)?.join('');
+
     return { props: { data, endDate: parseDate } };
   }
 };
@@ -54,7 +55,10 @@ export default function Home({ endDate }: { endDate: string | null }) {
       {curPage === false && (
         <div
           style={{
+            position: 'absolute',
+            zIndex: '1',
             margin: '0 auto',
+            justifyContent: 'center',
             display: 'flex',
             gap: '15px',
             flexWrap: 'wrap',
@@ -72,7 +76,11 @@ export default function Home({ endDate }: { endDate: string | null }) {
             subtitle="지하철을 확인할 수 있습니다."
             innerContent={<SubwayList />}
           />
-          <BaseItem title="" subtitle="" innerContent={<WeatherList />} />
+          <BaseItem
+            title="날씨정보"
+            subtitle="날씨 정보를 확인할 수 있습니다."
+            innerContent={<WeatherList />}
+          />
           <BaseCalendar />
         </div>
       )}

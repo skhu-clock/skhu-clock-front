@@ -50,9 +50,6 @@ export default function Home({ endDate }: { endDate: string | null }) {
 
   return (
     <>
-      <h2 style={{ fontSize: '3rem', fontWeight: '700' }}>
-        종강일 남은 기간 : {calcuateDateDIff(endDate || '') + '일'}
-      </h2>
       <br />
       {curPage === false && (
         <div

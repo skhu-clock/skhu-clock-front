@@ -8,11 +8,18 @@ export type ButtonProps = ComponentProps<'button'> & {
 };
 
 export type WeatherApi = {
-  temp: string;
-  precipitation: string;
-  humid: string;
-  sky: string;
-  forecastTime: string;
+  weather: {
+    temp: string;
+    precipitation: string;
+    humid: string;
+    sky: string;
+    forecastTime: string;
+  };
+};
+
+export type AvatarProps = ComponentProps<'button'> & {
+  icon?: React.ReactNode;
+  size: number;
 };
 
 export type SubWayAPi = {

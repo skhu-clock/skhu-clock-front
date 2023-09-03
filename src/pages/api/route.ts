@@ -1,4 +1,4 @@
-import Instance from '@/constants';
+import Instance from '@/components/constants';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 

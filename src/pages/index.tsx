@@ -1,20 +1,34 @@
+import type { GetServerSideProps } from 'next';
 import React, { useState, useEffect } from 'react';
 import { BaseItem, BaseCalendar, Avatar } from '@/components';
-import page from './constants';
+import page from '@/components/constants/page';
 
-import calcuateDateDIff from '@/utils/calculateDateDiff';
 import type { Schedule } from '@/types';
 
-export const getStaticProps = async () => {
-  const res = await fetch('http://skhuclock.duckdns.org/api/schedule');
-  if (res.ok) {
-    const data = (await res.json()) as Schedule[];
-    const endDate = data.filter((eachData) =>
-      eachData.txt.includes('2학기 종강일')
-    );
-    const parseDate = endDate[0].date.match(/\d+/g)?.join('');
+export const getServerSideProps: GetServerSideProps<{
+  data: Schedule[];
+  endDate: string | null;
+}> = async () => {
+  try {
+    const res = await fetch('https://skhuclock.duckdns.org/api/schedule');
 
-    return { props: { data, endDate: parseDate } };
+    if (res.ok) {
+      const data = (await res.json()) as Schedule[];
+      const endDateData = data.find((eachData) =>
+        eachData.txt.includes('2학기 종강일')
+      );
+
+      const parseDate = endDateData?.date?.match(/\d+/g)?.join('');
+
+      return { props: { data, endDate: parseDate || null } };
+    } else {
+      // Handle the case when the response is not OK
+      console.error('Failed to fetch data');
+      return { props: { data: [], endDate: null } };
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return { props: { data: [], endDate: null } };
   }
 };
 

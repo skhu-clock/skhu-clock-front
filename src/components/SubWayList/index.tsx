@@ -42,6 +42,20 @@ const SubwayList = () => {
     setFetchFlag(!fetchFlag);
   };
 
+  const handleClickPrevPage = () => {
+    if (subway && page - 2 < 0) {
+      return;
+    }
+    setPage(page - 1);
+  };
+
+  const handleClickNextPage = () => {
+    if (subway && page + 2 > subway?.length) {
+      return;
+    }
+    setPage(page + 1);
+  };
+
   return (
     <>
       {isLoading && <Skeleton.Box width={450} height={180} />}
@@ -65,20 +79,8 @@ const SubwayList = () => {
               height={30}
             />
 
-            <button
-              onClick={() => {
-                setPage(page - 1);
-              }}
-            >
-              이전
-            </button>
-            <button
-              onClick={() => {
-                setPage(page + 1);
-              }}
-            >
-              다음
-            </button>
+            <button onClick={handleClickPrevPage}>이전</button>
+            <button onClick={handleClickNextPage}>다음</button>
           </ButtonLists>
         </>
       )}

@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {
-  BaseItem,
-  BaseCalendar,
-  NoticeList,
-  SubwayList,
-  WeatherList,
-  Avatar,
-} from '@/components';
+import { BaseItem, BaseCalendar, Avatar } from '@/components';
+import page from './constants';
 
 import calcuateDateDIff from '@/utils/calculateDateDiff';
 import type { Schedule } from '@/types';
@@ -66,22 +60,16 @@ export default function Home({ endDate }: { endDate: string | null }) {
             ...fadeInAnimation,
           }}
         >
-          <BaseItem
-            title="학사공지"
-            subtitle="최근 올라온 15개의 학사공지를 보여드립니다."
-            innerContent={<NoticeList />}
-          />
-          <BaseItem
-            title="다음지하철"
-            subtitle="지하철을 확인할 수 있습니다."
-            innerContent={<SubwayList />}
-          />
-          <BaseItem
-            title="날씨정보"
-            subtitle="날씨 정보를 확인할 수 있습니다."
-            innerContent={<WeatherList />}
-          />
-          <BaseCalendar />
+          {page.map(({ item }) => {
+            return (
+              <BaseItem
+                key={item.title}
+                title={item.title}
+                subtitle={item.subtitle}
+                innerContent={item.innerContent()}
+              />
+            );
+          })}
         </div>
       )}
 

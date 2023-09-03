@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useSubwayAPi } from '@/hooks/useSubWay';
 import { useState } from 'react';
 import Skeleton from '../Common/Skeleton';
+import SUBWAY_MAP from '../constants/subway';
 
 const ButtonLists = styled.div`
   display: flex;
@@ -12,10 +13,22 @@ const ButtonLists = styled.div`
   align-items: center;
   gap: 5px;
 `;
+
+const 지하철호선 = styled.span<{ line: string }>`
+  font-weight: 700;
+  color: ${(props) => (props.line === '1호선' ? '#0052A4' : '#747F00')};
+`;
+
 const renderSubWay = (item: SubWayAPi) => {
+  const 호선 = SUBWAY_MAP.get(item.subway.subwayId + '');
   return (
     <div>
       <Image src="/subway.png" width={30} height={30} alt="지하철 이미지" />
+      {호선 && (
+        <div>
+          호선 : <지하철호선 line={호선}>{호선}</지하철호선>
+        </div>
+      )}
       <div>노선 : {item.subway.trainLineNm}</div>
       <div>방향 : {item.subway.updnLine}</div>
       <div>상태 : {item.subway.arvlMsg1}</div>
@@ -43,7 +56,7 @@ const SubwayList = () => {
   };
 
   const handleClickPrevPage = () => {
-    if (subway && page - 2 < 0) {
+    if (subway && page - 1 <= 0) {
       return;
     }
     setPage(page - 1);
@@ -66,7 +79,6 @@ const SubwayList = () => {
             renderItem={renderSubWay}
             items={subway?.slice(page, page + 2) || []}
           />
-
           <ButtonLists>
             <Image
               onClick={handleClickFetchButton}

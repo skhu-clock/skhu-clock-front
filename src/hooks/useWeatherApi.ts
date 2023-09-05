@@ -1,4 +1,3 @@
-import Instance from '@/components/constants';
 import { useState, useEffect } from 'react';
 import type { WeatherApi } from '@/types/index';
 

@@ -1,5 +1,5 @@
 import type { GetServerSideProps } from 'next';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, CSSProperties } from 'react';
 import { BaseItem, BaseCalendar, Avatar } from '@/components';
 import page from '@/components/constants/page';
 
@@ -33,14 +33,6 @@ export const getServerSideProps: GetServerSideProps<{
 };
 
 export default function Home({ endDate }: { endDate: string | null }) {
-  const fadeInAnimation = {
-    animation: 'fadeIn 1s linear',
-    '@keyframes fadeIn': {
-      '0%': { opacity: 0 },
-      '50%': { opacity: 0.5 },
-      '100%': { opacity: 1 },
-    },
-  };
   const [curPage, setCurPage] = useState(false);
 
   const handleWheelEvent = (event: WheelEvent) => {
@@ -52,40 +44,40 @@ export default function Home({ endDate }: { endDate: string | null }) {
       setCurPage(true);
     }
   };
+
   useEffect(() => {
-    window.addEventListener('wheel', handleWheelEvent);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('wheel', handleWheelEvent);
+    }
     return () => window.removeEventListener('wheel', handleWheelEvent);
   }, []);
+
+  const containerStyles: CSSProperties = {
+    position: 'absolute',
+    zIndex: '1',
+    margin: '0 auto',
+    justifyContent: 'center',
+    display: 'flex',
+    gap: '15px',
+    flexWrap: 'wrap',
+    maxWidth: '80%',
+    animation: 'fadeIn 1s linear',
+    opacity: curPage ? 0 : 1,
+  };
 
   return (
     <>
       <br />
-      {curPage === false && (
-        <div
-          style={{
-            position: 'absolute',
-            zIndex: '1',
-            margin: '0 auto',
-            justifyContent: 'center',
-            display: 'flex',
-            gap: '15px',
-            flexWrap: 'wrap',
-            maxWidth: '80%',
-            ...fadeInAnimation,
-          }}
-        >
-          {page.map(({ item }) => {
-            return (
-              <BaseItem
-                key={item.title}
-                title={item.title}
-                subtitle={item.subtitle}
-                innerContent={item.innerContent()}
-              />
-            );
-          })}
-        </div>
-      )}
+      <div style={{ ...containerStyles }}>
+        {page.map(({ item }) => (
+          <BaseItem
+            key={item.title}
+            title={item.title}
+            subtitle={item.subtitle}
+            innerContent={item.innerContent()}
+          />
+        ))}
+      </div>
 
       {curPage && (
         <>

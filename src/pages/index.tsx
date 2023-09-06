@@ -1,6 +1,6 @@
 import type { GetServerSideProps } from 'next';
 import React, { useState, useEffect, CSSProperties } from 'react';
-import { BaseItem, BaseCalendar, Avatar } from '@/components';
+import { BaseItem, BaseCalendar, Avatar, CurTime } from '@/components';
 import page from '@/components/constants/page';
 
 import type { Schedule } from '@/types';
@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps<{
   }
 };
 
-export default function Home({ endDate }: { endDate: string | null }) {
+export default function Home() {
   const [curPage, setCurPage] = useState(false);
 
   const handleWheelEvent = (event: WheelEvent) => {
@@ -81,6 +81,12 @@ export default function Home({ endDate }: { endDate: string | null }) {
 
       {curPage && (
         <>
+          <CurTime
+            year={new Date().getFullYear()}
+            month={new Date().getMonth()}
+            date={new Date().getDate()}
+            hour={new Date().getHours()}
+          />
           <Avatar src="/subway.png" size={50} alt="아바타" />
           <BaseCalendar />
         </>

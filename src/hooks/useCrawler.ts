@@ -18,7 +18,9 @@ export const useCrawlerAPi = () => {
 
     fetchCrawlData()
       .then((res) => setCrawlData(res))
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
   return { crawlData, isLoading, totalResult };

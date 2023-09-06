@@ -56,3 +56,10 @@ export type Schedule = {
   date: string;
   txt: string;
 };
+
+export type CurTimeProps = {
+  year: number;
+  month: number;
+  date: number;
+  hour: number;
+};

@@ -48,7 +48,15 @@ const NoticeList = () => {
         <>
           <ApiList
             renderItem={renderNotice}
-            items={crawlData?.slice(initPage, initPage + 5) || []}
+            items={
+              crawlData
+                ?.sort((a, b) => {
+                  const firstDate = new Date(a.writeDate).getDate();
+                  const secondDate = new Date(b.writeDate).getDate();
+                  return firstDate - secondDate;
+                })
+                .slice(initPage, initPage + 5) || []
+            }
           />
           <div>
             <button onClick={handleClickPrevPage}>이전</button>

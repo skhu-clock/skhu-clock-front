@@ -1,7 +1,7 @@
+import {useState} from 'react';
 import styled from '@emotion/styled';
 import { useWeatherAPi } from '@/hooks/useWeatherApi';
 import List from '../Common/List';
-import Image from 'next/image';
 import Skeleton from '../Common/Skeleton';
 import type { WeatherApi } from '@/types';
 import { Avatar } from '..';
@@ -48,8 +48,8 @@ const WeatherRenderItem = ({ weather }: WeatherApi) => {
 
 const WeatherList = () => {
   const { weather, isLoading } = useWeatherAPi();
+  const [page,setPage] = useState<number>(0);
 
-  console.log(weather);
   return (
     <>
       {isLoading && <Skeleton.Box width={450} height={180} />}

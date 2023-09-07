@@ -12,6 +12,9 @@ const WeatherContainer = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
 `;
 
 const WeatherTitle = styled.div`
@@ -26,6 +29,7 @@ const WeatherContent = styled.div`
   flex-direction: column;
   font-size: 20px;
   justify-content: center;
+  align-items: center;
 `;
 const WeatherRenderItem = ({ weather }: WeatherApi) => {
   return (
@@ -57,11 +61,9 @@ const WeatherList = () => {
       {!isLoading && (
         <List
           renderItem={WeatherRenderItem}
-          items={weather || []}
+          items={weather?.slice(0, 4) || []}
           listStyle={{
             display: 'flex',
-            gap: '5px',
-            flexWrap: 'wrap',
           }}
         />
       )}

@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { useWeatherAPi } from '@/hooks/useWeatherApi';
 import List from '../Common/List';
-import Image from 'next/image';
 import Skeleton from '../Common/Skeleton';
 import type { WeatherApi } from '@/types';
 import { Avatar } from '..';
@@ -12,6 +11,9 @@ const WeatherContainer = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
 `;
 
 const WeatherTitle = styled.div`
@@ -26,6 +28,7 @@ const WeatherContent = styled.div`
   flex-direction: column;
   font-size: 20px;
   justify-content: center;
+  align-items: center;
 `;
 const WeatherRenderItem = ({ weather }: WeatherApi) => {
   return (
@@ -49,7 +52,6 @@ const WeatherRenderItem = ({ weather }: WeatherApi) => {
 const WeatherList = () => {
   const { weather, isLoading } = useWeatherAPi();
 
-  console.log(weather);
   return (
     <>
       {isLoading && <Skeleton.Box width={450} height={180} />}
@@ -57,11 +59,9 @@ const WeatherList = () => {
       {!isLoading && (
         <List
           renderItem={WeatherRenderItem}
-          items={weather || []}
+          items={weather?.slice(0, 4) || []}
           listStyle={{
             display: 'flex',
-            gap: '5px',
-            flexWrap: 'wrap',
           }}
         />
       )}

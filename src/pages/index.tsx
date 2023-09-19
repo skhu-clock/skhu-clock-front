@@ -7,22 +7,6 @@ import React, {
 import { BaseItem, BaseCalendar, Avatar } from '@/components';
 import page from '@/components/constants/page';
 
-/*
-1. div엘리멘트를 탐지하는 hook을 만듦 / 완료
-2. map을 이용해서 화면에 뿌려주기 위해 배열을 만듦
-2-1. ex)
-const scrollList = {
-  0: hooks('clock'),
-  1: hooks('contants'),
-  2: hooks('calender'),
-  length:3,
-}
-3. useEffect를 사용해서 스크롤 이벤트를 발생시키면 currentScroll +,-를 이용해서 화면을 이동한다.
-4. 스크롤 이벤트가 발생하면 scrollList을 탐지해서 해당하는 div를 찾아서 화면을 이동한다.
-*/
-
-// console.log(scrollList[0]);
-
 export default function Home() {
   // 쌉 쌉 하드코디디딩 이러믄 안돼~
   // 사실 그래서 배열로 려고했는디 뭔가뭔가 이상해짐 ㅇㅇ

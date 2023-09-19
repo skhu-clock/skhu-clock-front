@@ -1,14 +1,11 @@
 import React, {
   CSSProperties,
   WheelEvent,
-  use,
-  useEffect,
   useRef,
   useState,
 } from 'react';
 import { BaseItem, BaseCalendar, Avatar } from '@/components';
 import page from '@/components/constants/page';
-import useMoveScrool from '@/hooks/useMoveScroll';
 
 /*
 1. div엘리멘트를 탐지하는 hook을 만듦 / 완료
@@ -51,10 +48,6 @@ export default function Home() {
   const [currentScroll, setCurrentScroll]= useState(0);
 
   const onHandelWheel = (e: WheelEvent<HTMLDivElement>) => {
-    console.log('wheeled!');
-    console.log('현재 페이지넘버', currentScroll);
-    console.log('이벤트 방향',e.deltaY);
-
     // 휠업 다운 이벤트
     // 휠 다운 이벤트
     if (e.deltaY > 0 && currentScroll === 0) {

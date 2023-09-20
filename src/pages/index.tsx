@@ -1,11 +1,7 @@
-import React, {
-  CSSProperties,
-  WheelEvent,
-  useRef,
-  useState,
-} from 'react';
+import React, { CSSProperties, WheelEvent, useRef, useState } from 'react';
 import { BaseItem, BaseCalendar, Avatar } from '@/components';
 import page from '@/components/constants/page';
+import Linkpage from '@/components/Linkpage';
 
 export default function Home() {
   // 쌉 쌉 하드코디디딩 이러믄 안돼~
@@ -29,7 +25,7 @@ export default function Home() {
 
   // wheel 이벤트 핸들러시아
   // wheel 통제해!! 행동제한해!! 구속시켜!!
-  const [currentScroll, setCurrentScroll]= useState(0);
+  const [currentScroll, setCurrentScroll] = useState(0);
 
   const onHandelWheel = (e: WheelEvent<HTMLDivElement>) => {
     // 휠업 다운 이벤트
@@ -37,10 +33,10 @@ export default function Home() {
     if (e.deltaY > 0 && currentScroll === 0) {
       onMoveToElement(currentScroll + 1);
       setCurrentScroll(currentScroll + 1);
-    }else if (e.deltaY > 0 && currentScroll === 1) {
+    } else if (e.deltaY > 0 && currentScroll === 1) {
       onMoveToElement(currentScroll + 1);
       setCurrentScroll(currentScroll + 1);
-    }else if (e.deltaY > 0 && currentScroll === 2) {
+    } else if (e.deltaY > 0 && currentScroll === 2) {
       onMoveToElement(currentScroll);
       setCurrentScroll(currentScroll);
     }
@@ -48,10 +44,10 @@ export default function Home() {
     else if (e.deltaY < 0 && currentScroll === 0) {
       onMoveToElement(currentScroll);
       setCurrentScroll(currentScroll);
-    }else if (e.deltaY < 0 && currentScroll === 1) {
+    } else if (e.deltaY < 0 && currentScroll === 1) {
       onMoveToElement(currentScroll - 1);
       setCurrentScroll(currentScroll - 1);
-    }else if (e.deltaY < 0 && currentScroll === 2) {
+    } else if (e.deltaY < 0 && currentScroll === 2) {
       onMoveToElement(currentScroll - 1);
       setCurrentScroll(currentScroll - 1);
     }
@@ -60,21 +56,10 @@ export default function Home() {
   return (
     <div style={indexStyles}>
       <div style={linkDivStyles} onWheel={onHandelWheel} ref={eleArr[0]}>
-        <h1>👋 안녕하세요!</h1>
-        <div>a;sldfasd</div>
-        <div>a;sldfasd</div>
-        <div>a;sldfasd</div>
-        <div>a;sldfasd</div>
-        <div>a;sldfasd</div>
-        <div>a;sldfasd</div>
-        <div>a;sldfasd</div>
+        <Linkpage />
       </div>
 
-      <div
-        style={contantsDivStyles}
-        ref={eleArr[1]}
-        onWheel={onHandelWheel}
-      >
+      <div style={contantsDivStyles} ref={eleArr[1]} onWheel={onHandelWheel}>
         <div style={contantsStyles}>
           {page.map(({ item }) => (
             <BaseItem
@@ -87,11 +72,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div
-        ref={eleArr[2]}
-        style={callenderStyles}
-        onWheel={onHandelWheel}
-      >
+      <div ref={eleArr[2]} style={callenderStyles} onWheel={onHandelWheel}>
         <Avatar src="/subway.png" size={50} alt="아바타" />
         <BaseCalendar />
       </div>

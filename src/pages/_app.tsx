@@ -23,8 +23,5 @@ const mainHome = css`
   width: auto;
   height: 100vh;
 
-  font-family: 'Handjet', cursive;
   font-family: 'Noto Sans KR', sans-serif;
-  font-family: 'REM', sans-serif;
-  font-family: 'Stylish', sans-serif;
 `;

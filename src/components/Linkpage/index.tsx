@@ -1,6 +1,7 @@
 import { CSSProperties, useEffect, useState } from 'react';
 import links from '../constants/links';
 import Baselink from '../Baselink';
+import {getFullYmdStr} from '../../hooks/useTime';
 
 const Linkpage = () => {
 
@@ -31,6 +32,7 @@ const Linkpage = () => {
 
   return (
     <div style={basicStyle}>
+      <span style={dateStyle}>{getFullYmdStr()}</span>
       <span style={clockStyle}>
         {hour} : {minute}
       </span>
@@ -57,6 +59,13 @@ const basicStyle: CSSProperties = {
   width: '100%',
   minHeight: '100vh',
   gap: '1rem',
+};
+
+const dateStyle: CSSProperties = {
+  fontSize: '2rem',
+  color: 'white',
+  textShadow: '0 0 10px rgba(0,0,0,0.7)',
+  fontWeight: 'bold',
 };
 
 const clockStyle: CSSProperties = {

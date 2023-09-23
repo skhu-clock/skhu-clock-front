@@ -23,6 +23,8 @@ export type AvatarProps = ComponentProps<'button'> & {
 };
 
 export type SubWayAPi = {
+  [x: string]: any;
+  forEach: any;
   subway: {
     subwayId: number;
     updnLine: string;

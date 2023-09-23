@@ -1,4 +1,4 @@
-import { CSSProperties, useEffect, useState } from 'react';
+import { CSSProperties} from 'react';
 import links from '../constants/links';
 import Baselink from '../Baselink';
 import {getFullYmdStr} from '../../hooks/useTime';
@@ -21,7 +21,7 @@ const Linkpage = () => {
   const timeArr = timeStampArr[3].split(':');
 */
 
-  // 종강까지 남은 날짜 계산기\
+  // 종강까지 남은 날짜 계산기
   // 나중에 훅으로 뺄 수있을듯?
   const datenow = new Date().getTime(); // 현재 날짜
   const dateend = new Date('2023-12-18').getTime(); // 종강 날짜

@@ -11,7 +11,6 @@ import UnderLineOne from './UnderLineOne';
 import UnderLineSeven from './UnderlineSeven';
 
 const SubwayList = () => {
-  const [page, setPage] = useState<number>(0);
   const [fetchFlag, setFetchFlag] = useState<boolean>(false);
   const { subway, isLoading } = useSubwayAPi(fetchFlag);
 
@@ -19,22 +18,6 @@ const SubwayList = () => {
   // 새로고침
   const handleClickFetchButton = () => {
     setFetchFlag(!fetchFlag);
-  };
-
-  // 이전 페이지
-  const handleClickPrevPage = () => {
-    if (subway && page - 1 <= 0) {
-      return;
-    }
-    setPage(page - 1);
-  };
-
-  // 다음페이지
-  const handleClickNextPage = () => {
-    if (subway && page + 2 > subway?.length) {
-      return;
-    }
-    setPage(page + 1);
   };
 
   return (

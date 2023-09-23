@@ -19,7 +19,6 @@ export default async function handler(req: NextRequest) {
       },
     });
   } catch (error) {
-    console.log(error);
     return new Response(JSON.stringify({ error: 'An error occurred' }), {
       status: 500,
       headers: {

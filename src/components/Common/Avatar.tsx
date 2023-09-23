@@ -21,13 +21,9 @@ const AvatarWrapper = styled.div<{ shape: 'circle' | 'round' | 'square' }>`
 `;
 
 const Avatar = ({
-  lazy,
-  threshold,
   src,
   alt,
   mode = 'cover',
-  placeholder,
-  props,
   size = 70,
   shape = 'circle',
 }: {

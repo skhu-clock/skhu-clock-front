@@ -29,10 +29,11 @@ const BaseCalendar = () => {
       if (res.ok) {
         const data = await res.json();
 
-        const curDate = new Date().getMonth();
+        const curDate = new Date().getMonth() + 1;
+
         const filteredSchedule = data.filter((item: Schedule) => {
-          const itemDate = new Date(item.date);
-          return itemDate.getMonth() === curDate;
+          const newDate = item.date.replace(/[^0-9]/g, '').slice(0, 2);
+          return curDate === Number(newDate);
         });
 
         setSchedule(filteredSchedule);

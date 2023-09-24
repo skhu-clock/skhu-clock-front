@@ -15,7 +15,7 @@ export const useSubwayAPi = (flag?: boolean) => {
     };
 
     fetchSubwayData().finally(() => setIsLoading(false));
-  }, [flag, subway]);
+  }, [flag]);
 
   return { subway, totalResult, isLoading };
 };

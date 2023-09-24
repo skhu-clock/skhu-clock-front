@@ -13,29 +13,39 @@ import { useState } from 'react';
 const UnderLineOne = () => {
   // map test
   const [fetchFlag, setFetchFlag] = useState<boolean>(false);
-  const { subway, isLoading } = useSubwayAPi(fetchFlag);
-  const [subwayline, setSubwayline] = useState<SubWayAPi[] | undefined>(
-    undefined
+  const { subway } = useSubwayAPi(fetchFlag);
+  console.log(subway);
+  const 첫번째호선하행 = subway?.filter(
+    (item) => item.subway.subwayId === 1001 && item.subway.updnLine === '하행'
   );
-  let a;
 
-  // (12){}
-  if (!isLoading) {
-    setSubwayline(
-      subway?.filter(
-        (item) =>
-          item.subway.subwayId === 1001 && item.subway.updnLine === '하행'
-      )
-    );
-  }
+  const 첫번쨰호선상행 = subway?.filter(
+    (item) => item.subway.subwayId === 1001 && item.subway.updnLine === '상행'
+  );
+
+  const 일곱번째호선호선하행 = subway?.filter(
+    (item) => item.subway.subwayId === 1007 && item.subway.updnLine === '하행'
+  );
+
+  const 일곱번째호선상행 = subway?.filter(
+    (item) => item.subway.subwayId === 1007 && item.subway.updnLine === '상행'
+  );
+
+  console.log(
+    첫번쨰호선상행,
+    첫번째호선하행,
+    일곱번째호선호선하행,
+    일곱번째호선상행
+  );
   // const 호선 = SUBWAY_MAP.get(item.subway.subwayId + '');
   // const lineWay = SUBWAY_MAP.get(item.subway.updnLine);
 
   return (
     <div>
-      {subwayline?.map((item) => (
-        <div key={item.id}>{item.title}</div>
-      ))}
+      {첫번째호선하행 &&
+        첫번째호선하행?.map((item) => (
+          <div key={item.subway.arvlMsg2}>{item.subway.arvlMsg1}</div>
+        ))}
     </div>
   );
 };

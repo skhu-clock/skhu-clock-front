@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import type { Schedule } from '@/types';
 
-const useSchedule = () => {
+export const useSchedule = () => {
   const [schedule, setSchedule] = useState<Schedule[] | null>(null);
+  console.log(schedule);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,5 +27,3 @@ const useSchedule = () => {
 
   return { schedule };
 };
-
-export default useSchedule;

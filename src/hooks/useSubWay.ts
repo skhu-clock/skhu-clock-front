@@ -16,11 +16,8 @@ export const useSubwayAPi = (flag?: boolean) => {
     };
 
     fetchSubwayData()
-      .then(() => {
-        if (subway) setTotalResult(subway?.length);
-      })
       .finally(() => setIsLoading(false));
-  }, [flag]);
+  }, [flag]);  
 
   return { subway, totalResult, isLoading };
 };

@@ -1,6 +1,8 @@
 import type { SubWayAPi } from '@/types';
 import SUBWAY_MAP from '../constants/subway';
 import styled from '@emotion/styled';
+import { useSubwayAPi } from '@/hooks/useSubWay';
+import { useState } from 'react';
 /*
 1. 각 호선별로 색상을 다르게 표시하기위한  1001, 1007 분류
 2. 각 호선별로 상행 하행을 분류
@@ -8,12 +10,39 @@ import styled from '@emotion/styled';
 4. 총 4개의 APIList를 만들어서 각 호선별로 상행 하행을 분류
 */
 
-const UnderLineOne = (item: SubWayAPi) => {
-  const 호선 = SUBWAY_MAP.get(item.subway.subwayId + '');
-  const lineWay = SUBWAY_MAP.get(item.subway.updnLine);
+const UnderLineOne = () => {
+  // map test
+  const [fetchFlag, setFetchFlag] = useState<boolean>(false);
+  const { subway, isLoading } = useSubwayAPi(fetchFlag);
+  const [subwayline, setSubwayline] = useState<SubWayAPi[] | undefined>(
+    undefined
+  );
+  let a;
+
+  // (12){}
+  if (!isLoading) {
+    setSubwayline(
+      subway?.filter(
+        (item) =>
+          item.subway.subwayId === 1001 && item.subway.updnLine === '하행'
+      )
+    );
+  }
+  // const 호선 = SUBWAY_MAP.get(item.subway.subwayId + '');
+  // const lineWay = SUBWAY_MAP.get(item.subway.updnLine);
 
   return (
     <div>
+      {subwayline?.map((item) => (
+        <div key={item.id}>{item.title}</div>
+      ))}
+    </div>
+  );
+};
+
+export default UnderLineOne;
+/*
+  원래 div내부 코드
       {호선 === '1호선' && lineWay === '하행' ? (
         <div>
           {item.subway.arvlMsg1.length < 7 ? (
@@ -25,11 +54,7 @@ const UnderLineOne = (item: SubWayAPi) => {
       ) : (
         <span></span>
       )}
-    </div>
-  );
-};
-
-export default UnderLineOne;
+ */
 
 const LineLength = styled.div`
   overflow: hidden;

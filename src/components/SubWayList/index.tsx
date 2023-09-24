@@ -14,6 +14,25 @@ const SubwayList = () => {
   const [fetchFlag, setFetchFlag] = useState<boolean>(false);
   const { subway, isLoading } = useSubwayAPi(fetchFlag);
 
+  const list: {
+    subwayId: number;
+    updnLine: string;
+    trainLineNm: string;
+    statnNm: string;
+    arvlMsg1: string;
+    arvlMsg2: string;
+    arvlMsg3: string;
+    arvlCd: number;
+  }[] = [];
+
+  // (12){}
+  if (!isLoading) {
+    subway?.forEach((item) => list.push(item.subway));
+    console.log(list[1]);
+    
+    const a = subway?.filter((item) => item.subway.subwayId === 1001);
+  }
+
   // 페이지네이션
   // 새로고침
   const handleClickFetchButton = () => {
@@ -91,7 +110,6 @@ const subwayTitleWrapperStyles: CSSProperties = {
   display: 'flex',
   flexDirection: 'row',
   gap: '2rem',
-  
 };
 
 const subwayTitleListStyles: CSSProperties = {

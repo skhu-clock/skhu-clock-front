@@ -2,6 +2,7 @@ import React, { CSSProperties, WheelEvent, useRef, useState } from 'react';
 import { BaseItem, BaseCalendar, Avatar } from '@/components';
 import page from '@/components/constants/page';
 import Linkpage from '@/components/Linkpage';
+import schedulePage from '@/components/constants/schedule';
 
 export default function Home() {
   // 쌉 쌉 하드코디디딩 이러믄 안돼~
@@ -74,7 +75,16 @@ export default function Home() {
 
       <div ref={eleArr[2]} style={callenderStyles} onWheel={onHandelWheel}>
         <Avatar src="/subway.png" size={50} alt="아바타" />
-        <BaseCalendar />
+        <div style={contantsStyles}>
+          {schedulePage.map(({ item }) => (
+            <BaseItem
+              key={item.title}
+              title={item.title}
+              subtitle={item.subtitle}
+              innerContent={item.innerContent()}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

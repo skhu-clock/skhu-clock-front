@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
 import type { Schedule } from '@/types';
 
-const useSchedule = () => {
+export const useSchedule = () => {
   const [schedule, setSchedule] = useState<Schedule[] | null>(null);
+  console.log(schedule);
+
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch('/api/schedule');
       if (res.ok) {
         const data = await res.json();
-        setSchedule(data);
+        setSchedule(data);        
       }
     };
 
@@ -18,5 +20,3 @@ const useSchedule = () => {
 
   return { schedule };
 };
-
-export default useSchedule;

@@ -10,14 +10,12 @@ export const useSubwayAPi = (flag?: boolean) => {
     setIsLoading(true);
     const fetchSubwayData = async () => {
       const res = await fetch('/api/subway');
-      if (res.ok) {
-        setSubway(await res.json());
-      }
+      const subwayData = await res.json();
+      setSubway(subwayData);
     };
 
-    fetchSubwayData()
-      .finally(() => setIsLoading(false));
-  }, [flag]);  
+    fetchSubwayData().finally(() => setIsLoading(false));
+  }, [flag, subway]);
 
   return { subway, totalResult, isLoading };
 };

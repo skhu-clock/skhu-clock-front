@@ -1,5 +1,5 @@
 import React, { CSSProperties, WheelEvent, useRef, useState } from 'react';
-import { BaseItem, BaseCalendar, Avatar } from '@/components';
+import { BaseItem, BaseCalendar} from '@/components';
 import page from '@/components/constants/page';
 import Linkpage from '@/components/Linkpage';
 
@@ -73,7 +73,6 @@ export default function Home() {
       </div>
 
       <div ref={eleArr[2]} style={callenderStyles} onWheel={onHandelWheel}>
-        <Avatar src="/subway.png" size={50} alt="아바타" />
         <BaseCalendar />
       </div>
     </div>

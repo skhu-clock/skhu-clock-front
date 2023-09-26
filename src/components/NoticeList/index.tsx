@@ -6,8 +6,8 @@ import { useCrawlerAPi } from '@/hooks/useCrawler';
 import { useState } from 'react';
 
 const NoticeLinkStyle = styled.a`
-  width: 320px;
-  padding: 0 5px;
+  width: 20rem;
+  padding: 0 .3125rem;
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -46,19 +46,27 @@ const NoticeList = () => {
         <Skeleton.Box width={450} height={180} />
       ) : (
         <>
-          <ApiList
-            renderItem={renderNotice}
-            items={
-              crawlData
-                ?.sort((a, b) => {
-                  const firstDate = new Date(a.writeDate).getDate();
-                  const secondDate = new Date(b.writeDate).getDate();
-                  return firstDate - secondDate;
-                })
-                .slice(initPage, initPage + 5) || []
-            }
-          />
-          <div>
+          <div style={{
+            width: '21.875rem',
+          }}>
+            <ApiList
+              renderItem={renderNotice}
+              items={
+                crawlData
+                  ?.sort((a, b) => {
+                    const firstDate = new Date(a.writeDate).getDate();
+                    const secondDate = new Date(b.writeDate).getDate();
+                    return firstDate - secondDate;
+                  })
+                  .slice(initPage, initPage + 5) || []
+              }
+            />
+          </div>
+          <div
+            style={{
+              width: '5rem',
+            }}
+          >
             <button onClick={handleClickPrevPage}>이전</button>
             {initPage / 5 + 1}
             <button onClick={handleClickNextPage}>이후</button>

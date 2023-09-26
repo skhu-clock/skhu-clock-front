@@ -14,11 +14,13 @@ const ApiList = <T extends {}>({ items, renderItem }: ListProps<T>) => {
         items={items}
         renderItem={renderItem}
         listStyle={{
-          width: '350px',
           display: 'flex',
           flexWrap: 'wrap',
-          gap: '15px',
-          flexDirection: 'column',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          gap: '1rem',
         }}
       />
     </ListWrapper>

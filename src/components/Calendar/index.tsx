@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import type { Schedule } from '@/types';
@@ -10,8 +10,22 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 const RenderCalenDarItem = (schedule: Schedule) => {
   return (
-    <div>
-      {schedule.date} <div>{schedule.txt}</div>
+    <div
+      style={{
+        width: '12rem',
+        height: '5rem',
+      }}
+    >
+      <p style={{ fontWeight: 'bold' }}>{schedule.date}</p>
+      <hr />
+      <div
+        style={{
+          wordBreak: 'keep-all',
+          fontWeight: 'nomal',
+        }}
+      >
+        {schedule.txt}
+      </div>
     </div>
   );
 };
@@ -44,15 +58,82 @@ const BaseCalendar = () => {
   }, []);
 
   return (
-    <div>
-      <Calendar onChange={onChange} value={value} />
-      <div>
-        <ApiList
-          items={schedule as Schedule[]}
-          renderItem={RenderCalenDarItem}
-        />
-      </div>
+    <div style={calenderWarpper}>
+      <section style={sectionStyle}>
+        <h1 style={h1Style}>달력</h1>
+        <h2 style={h2Style}>해당 달의 달력을 보여드립니다.</h2>
+        <div style={calednerCenter}>
+          <Calendar onChange={onChange} value={value} />
+        </div>
+      </section>
+      <section style={sectionStyle}>
+        <h1 style={h1Style}>학사일정</h1>
+        <h2 style={h2Style}>이번 달 학사일정 세부내용을 보여드립니다.</h2>
+        <div style={innerContentDiv}>
+          <ApiList
+            items={schedule as Schedule[]}
+            renderItem={RenderCalenDarItem}
+          />
+        </div>
+      </section>
     </div>
   );
 };
 export default BaseCalendar;
+
+const calenderWarpper: CSSProperties = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'row',
+  width: '100%',
+  height: '100%',
+  gap: '1rem',
+};
+
+const calednerCenter: CSSProperties = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+
+  width: '100%',
+  height: '100%',
+};
+
+const sectionStyle: CSSProperties = {
+  fontWeight: 'normal',
+  fontStyle: 'normal',
+  width: '30rem',
+  height: '30rem',
+  display: 'flex',
+  justifyContent: 'space-around',
+  flexDirection: 'column',
+  minHeight: '17rem',
+  backgroundColor: 'rgba(255,255,255,0.56)',
+  color: 'black',
+};
+
+const h1Style: CSSProperties = {
+  backgroundColor: 'white',
+  color: 'black',
+  fontWeight: '700',
+  fontSize: '1.4rem',
+  paddingLeft: '0.5rem',
+  paddingBottom: '0.5rem',
+};
+
+const h2Style: CSSProperties = {
+  fontSize: '1.2rem',
+  padding: '0.625rem',
+  fontWeight: 'bold',
+};
+
+const innerContentDiv: CSSProperties = {
+  background: 'rgba(255,255,255,0.8)',
+  display: 'flex',
+  width: '95%',
+  margin: '1.25rem auto',
+  borderRadius: '1rem',
+  justifyContent: 'center',
+  flex: 1,
+};

@@ -12,7 +12,7 @@ const SubwayTitle = <T extends {}>({ items, renderItem }: ListProps<T>) => {
           width: '5rem',
           display: 'flex',
           flexWrap: 'wrap',
-          gap: '15px',
+          gap: '1rem',
           flexDirection: 'column',
         }}
       />

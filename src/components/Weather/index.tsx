@@ -7,25 +7,47 @@ import type { WeatherApi } from '@/types';
 import { Avatar } from '..';
 
 const WeatherRenderItem = ({ weather }: WeatherApi) => {
-  const [sky, setSky] = useState<string>('');
+  
   /*
   1. 날씨 데이터를 받아온다.
-  2. 날씨데이터의 SKY값을 받아온다.
-  3. SKY값에 따라서 이미지를 다르게 보여준다.
-  4. 현재는 렌더링이 너무 많이 돼서 에러가 난다.
+  2. 날씨 데이터의 SKY 값이 어떤지 확인한다.
+  3. SKY 값에 따라 다른 이미지를 표시한다.
+  4. 현재는 렌더링이 너무 많이 되어 오류가 발생한다.
   */
-  // if (weather.sky === '1') {
-  //   setSky('/sunnyday.png');
-  // } else if (weather.sky === '3') {
-  //   setSky('/cloudy.png');
-  // } else setSky('/rainy.png');
+
+  // Instead of using multiple if statements, you can use a switch statement
+  // to make the code more concise and readable.
 
   return (
     <WeatherContainer>
       <WeatherTitle>{weather.forecastTime + '시'}</WeatherTitle>
-
+      
       <WeatherContainer>
-        <Avatar size={32} alt="이미지" mode="cover" shape="round" src={'/sunnyday.png'} />
+        {Number(weather.precipitation) > 70 ? (
+          <Avatar
+            size={32}
+            alt="이미지"
+            mode="cover"
+            shape="round"
+            src={'/rainy.png'}
+          />
+        ) : Number(weather.sky) === 4 || Number(weather.sky) === 3? (
+          <Avatar
+            size={32}
+            alt="이미지"
+            mode="cover"
+            shape="round"
+            src={'/cloudy.png'}
+          />
+        ) : (
+          <Avatar
+            size={32}
+            alt="이미지"
+            mode="cover"
+            shape="round"
+            src={'/sunnyday.png'}
+          />
+        )}
         <WeatherContent>{weather.temp + '도'}</WeatherContent>
       </WeatherContainer>
     </WeatherContainer>

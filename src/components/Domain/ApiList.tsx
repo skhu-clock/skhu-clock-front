@@ -20,7 +20,7 @@ const ApiList = <T extends {}>({ items, renderItem }: ListProps<T>) => {
           alignItems: 'center',
           justifyContent: 'center',
           width: '100%',
-          gap: '0.9375rem',
+          gap: '1rem',
         }}
       />
     </ListWrapper>

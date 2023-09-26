@@ -17,14 +17,14 @@ const CurTime = ({ year, month, date, hour }: CurTimeProps) => {
   return (
     <div
       style={{
-        fontSize: '30px',
+        fontSize: '1.875rem',
         color: '#fff',
       }}
     >
       <div>{year + ' ' + month + ' ' + date}</div>
       <div
         style={{
-          fontSize: '28px',
+          fontSize: '1.75rem',
           color: '#fff',
         }}
       >

@@ -10,15 +10,22 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 const RenderCalenDarItem = (schedule: Schedule) => {
   return (
-    <div style={{
-      width: '13.5rem',
-      height: '5rem',
-    }}>
-      {schedule.date} 
+    <div
+      style={{
+        width: '12rem',
+        height: '5rem',
+      }}
+    >
+      <p style={{ fontWeight: 'bold' }}>{schedule.date}</p>
       <hr />
-      <div style={{
-        wordBreak: 'keep-all',
-      }}>{schedule.txt}</div>
+      <div
+        style={{
+          wordBreak: 'keep-all',
+          fontWeight: 'nomal',
+        }}
+      >
+        {schedule.txt}
+      </div>
     </div>
   );
 };
@@ -54,14 +61,14 @@ const BaseCalendar = () => {
     <div style={calenderWarpper}>
       <section style={sectionStyle}>
         <h1 style={h1Style}>달력</h1>
-        <h2 style={h2Style}>달력입니다</h2>
+        <h2 style={h2Style}>해당 달의 달력을 보여드립니다.</h2>
         <div style={calednerCenter}>
           <Calendar onChange={onChange} value={value} />
         </div>
       </section>
       <section style={sectionStyle}>
         <h1 style={h1Style}>학사일정</h1>
-        <h2 style={h2Style}>이번 달 학사일정 세부내용을 보여드립니다</h2>
+        <h2 style={h2Style}>이번 달 학사일정 세부내용을 보여드립니다.</h2>
         <div style={innerContentDiv}>
           <ApiList
             items={schedule as Schedule[]}
@@ -101,7 +108,7 @@ const sectionStyle: CSSProperties = {
   display: 'flex',
   justifyContent: 'space-around',
   flexDirection: 'column',
-  minHeight: '272px',
+  minHeight: '17rem',
   backgroundColor: 'rgba(255,255,255,0.56)',
   color: 'black',
 };
@@ -118,6 +125,7 @@ const h1Style: CSSProperties = {
 const h2Style: CSSProperties = {
   fontSize: '1.2rem',
   padding: '0.625rem',
+  fontWeight: 'bold',
 };
 
 const innerContentDiv: CSSProperties = {

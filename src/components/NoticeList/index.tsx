@@ -6,8 +6,8 @@ import { useCrawlerAPi } from '@/hooks/useCrawler';
 import { useState } from 'react';
 
 const NoticeLinkStyle = styled.a`
-  width: 320px;
-  padding: 0 5px;
+  width: 20rem;
+  padding: 0 .3125rem;
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -47,7 +47,7 @@ const NoticeList = () => {
       ) : (
         <>
           <div style={{
-            width: '350px',
+            width: '21.875rem',
           }}>
             <ApiList
               renderItem={renderNotice}

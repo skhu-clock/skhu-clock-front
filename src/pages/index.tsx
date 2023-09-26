@@ -73,7 +73,6 @@ export default function Home() {
       </div>
 
       <div ref={eleArr[2]} style={callenderStyles} onWheel={onHandelWheel}>
-        <Avatar src="/subway.png" size={50} alt="아바타" />
         <BaseCalendar />
       </div>
     </div>

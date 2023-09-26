@@ -1,4 +1,5 @@
 import { NoticeList, SubwayList, WeatherList } from '@/components';
+import RestaruarntList from '../Restaurant';
 
 type Page = {
   item: {
@@ -28,6 +29,13 @@ const page: Page[] = [
       title: '날씨정보',
       subtitle: '날씨 정보를 확인할 수 있습니다.',
       innerContent: WeatherList,
+    },
+  },
+  {
+    item: {
+      title: '근처 식당',
+      subtitle: '성공회대 반경 800M 이내의 식당을 확인할 수 있습니다.',
+      innerContent: RestaruarntList
     },
   },
 ];

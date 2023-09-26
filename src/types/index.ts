@@ -7,6 +7,17 @@ export type ButtonProps = ComponentProps<'button'> & {
   outlined?: boolean;
 };
 
+
+export type ResturantApi = { 
+  id:number
+  distannce:number
+  categoryName:string
+  distance:number
+  placeUrl: string,
+  name: string,
+  addressName: string,
+};
+
 export type WeatherApi = {
   weather: {
     temp: string;

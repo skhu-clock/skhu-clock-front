@@ -28,38 +28,38 @@ export default function Home() {
   const [currentScroll, setCurrentScroll] = useState(0);
 
   const onHandelWheel = (e: WheelEvent<HTMLDivElement>) => {
-    // 휠업 다운 이벤트
-    // 휠 다운 이벤트
-    if (e.deltaY > 0 && currentScroll === 0) {
-      onMoveToElement(currentScroll + 1);
-      setCurrentScroll(currentScroll + 1);
-    } else if (e.deltaY > 0 && currentScroll === 1) {
-      onMoveToElement(currentScroll + 1);
-      setCurrentScroll(currentScroll + 1);
-    } else if (e.deltaY > 0 && currentScroll === 2) {
-      onMoveToElement(currentScroll);
-      setCurrentScroll(currentScroll);
-    }
-    // 휠 업 이벤트
-    else if (e.deltaY < 0 && currentScroll === 0) {
-      onMoveToElement(currentScroll);
-      setCurrentScroll(currentScroll);
-    } else if (e.deltaY < 0 && currentScroll === 1) {
-      onMoveToElement(currentScroll - 1);
-      setCurrentScroll(currentScroll - 1);
-    } else if (e.deltaY < 0 && currentScroll === 2) {
-      onMoveToElement(currentScroll - 1);
-      setCurrentScroll(currentScroll - 1);
-    }
+    if (e.deltaY > 0) {
+      // 휠을 아래로 스크롤할 때
+      onMoveToElement(Math.min(currentScroll + 1, 2));
+      setCurrentScroll(Math.min(currentScroll + 1, 2));
+    } else {
+      // 휠을 위로 스크롤할 때
+      onMoveToElement(Math.max(currentScroll - 1, 0));
+      setCurrentScroll(Math.max(currentScroll - 1, 0));
+    }    
   };
+
+  // 디바운스 함수
+  const debounce = (callback: Function, delay: number) => {
+    let timeoutId: NodeJS.Timeout;
+    return function(this: any, ...args: any[]) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        callback.apply(this, args);
+      }, delay);
+    };
+  };
+
+  // 500ms 딜레이로 호출  
+  const onHandelWheelDebounced = debounce(onHandelWheel, 500); 
 
   return (
     <div style={indexStyles}>
-      <div style={linkDivStyles} onWheel={onHandelWheel} ref={eleArr[0]}>
+      <div style={linkDivStyles} onWheel={onHandelWheelDebounced} ref={eleArr[0]}>
         <Linkpage />
       </div>
 
-      <div style={contantsDivStyles} ref={eleArr[1]} onWheel={onHandelWheel}>
+      <div style={contantsDivStyles} ref={eleArr[1]} onWheel={onHandelWheelDebounced}>
         <div style={contantsStyles}>
           {page.map(({ item }) => (
             <BaseItem
@@ -72,7 +72,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div ref={eleArr[2]} style={callenderStyles} onWheel={onHandelWheel}>
+      <div ref={eleArr[2]} style={callenderStyles} onWheel={onHandelWheelDebounced}>
         <BaseCalendar />
       </div>
     </div>

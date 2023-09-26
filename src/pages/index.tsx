@@ -1,5 +1,5 @@
 import React, { CSSProperties, WheelEvent, useRef, useState } from 'react';
-import { BaseItem, BaseCalendar, Avatar } from '@/components';
+import { BaseItem, BaseCalendar} from '@/components';
 import page from '@/components/constants/page';
 import Linkpage from '@/components/Linkpage';
 

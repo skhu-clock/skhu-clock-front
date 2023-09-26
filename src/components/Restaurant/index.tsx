@@ -39,7 +39,7 @@ const Data = styled.a`
 const renderRestarutList = (items: RestrantObj) => {
   return (
     <div key={items.restaurant.id}>
-      <Data href={items.restaurant.placeUrl}>{items.restaurant.name}</Data>
+      <Data href={items.restaurant.placeUrl}>{`[${items.restaurant.categoryName}]${items.restaurant.name}`}</Data>
     </div>
   );
 };
@@ -54,7 +54,6 @@ const RestaruarntList = () => {
       const res = await fetch('/api/KaKaoMap');
       const data = await res.json().finally(() => setIsLoading(false));
       setRestaruarntList(data);
-      console.log('restaurant', data);
     };
 
     fetchData();

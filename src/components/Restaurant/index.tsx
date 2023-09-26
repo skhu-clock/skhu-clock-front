@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import ApiList from '../Domain/ApiList';
 import Skeleton from '../Common/Skeleton';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 // import type { ResturantApi } from '@/types';
 
 interface RestrantObj {
@@ -19,10 +20,9 @@ interface ResturantApi {
   addressName: string;
 }
 
-
 const Data = styled.a`
   width: 20rem;
-  padding: 0 .3125rem;
+  padding: 0 0.3125rem;
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -38,8 +38,10 @@ const Data = styled.a`
 
 const renderRestarutList = (items: RestrantObj) => {
   return (
-    <div key={items.restaurant.id}>
-      <Data href={items.restaurant.placeUrl}>{`[${items.restaurant.categoryName}]${items.restaurant.name}`}</Data>
+    <div key={items.restaurant.id} className='notice-item'>
+      <Data
+        href={items.restaurant.placeUrl}
+      >{`[${items.restaurant.categoryName}]${items.restaurant.name}`}</Data>
     </div>
   );
 };
@@ -77,16 +79,43 @@ const RestaruarntList = () => {
               width: '21.875rem',
             }}
           >
-            <ApiList renderItem={renderRestarutList} items={restaruarntList?.filter((res) => res.restaurant).slice(initPage, initPage + 5) || []} />
+            <ApiList
+              renderItem={renderRestarutList}
+              items={
+                restaruarntList
+                  ?.filter((res) => res.restaurant)
+                  .slice(initPage, initPage + 5) || []
+              }
+            />
           </div>
           <div
             style={{
+              display: 'flex',
+              justifyContent: 'center',
               width: '5rem',
             }}
           >
-            <button onClick={handleClickPrevPage}>이전</button>
+            <Image
+              src="/left.png"
+              width={30}
+              height={30}
+              onClick={handleClickPrevPage}
+              alt={''}
+              style={{
+                cursor: 'pointer',
+              }}
+            ></Image>
             {initPage / 5 + 1}
-            <button onClick={handleClickNextPage}>이후</button>
+            <Image
+              src="/righth.png"
+              width={30}
+              height={30}
+              onClick={handleClickNextPage}
+              alt={''}
+              style={{
+                cursor: 'pointer',
+              }}
+            ></Image>
           </div>
         </>
       )}

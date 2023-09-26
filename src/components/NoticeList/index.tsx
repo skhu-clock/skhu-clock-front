@@ -4,10 +4,11 @@ import ApiList from '../Domain/ApiList';
 import Skeleton from '../Common/Skeleton';
 import { useCrawlerAPi } from '@/hooks/useCrawler';
 import { useState } from 'react';
+import Image from 'next/image';
 
 const NoticeLinkStyle = styled.a`
   width: 20rem;
-  padding: 0 .3125rem;
+  padding: 0 0.3125rem;
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -23,7 +24,7 @@ const NoticeLinkStyle = styled.a`
 
 const renderNotice = (item: CrawlerAPi) => {
   return (
-    <div>
+    <div className="notice-item">
       <NoticeLinkStyle href={item.url}>{item.title}</NoticeLinkStyle>
     </div>
   );
@@ -46,9 +47,11 @@ const NoticeList = () => {
         <Skeleton.Box width={450} height={180} />
       ) : (
         <>
-          <div style={{
-            width: '21.875rem',
-          }}>
+          <div
+            style={{
+              width: '21.875rem',
+            }}
+          >
             <ApiList
               renderItem={renderNotice}
               items={
@@ -64,12 +67,32 @@ const NoticeList = () => {
           </div>
           <div
             style={{
+              display: 'flex',
+              justifyContent: 'center',
               width: '5rem',
             }}
           >
-            <button onClick={handleClickPrevPage}>이전</button>
+            <Image
+              src="/left.png"
+              width={30}
+              height={30}
+              onClick={handleClickPrevPage}
+              alt={''}
+              style={{
+                cursor: 'pointer',
+              }}
+            ></Image>
             {initPage / 5 + 1}
-            <button onClick={handleClickNextPage}>이후</button>
+            <Image
+              src="/righth.png"
+              width={30}
+              height={30}
+              onClick={handleClickNextPage}
+              alt={''}
+              style={{
+                cursor: 'pointer',
+              }}
+            ></Image>
           </div>
         </>
       )}
@@ -78,3 +101,16 @@ const NoticeList = () => {
 };
 
 export default NoticeList;
+
+const BtnStyle = styled.button`
+  all: unset;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid #dadada;
+  border-radius: 50%;
+  background-color: #d1d1d1;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+`;

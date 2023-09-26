@@ -13,6 +13,10 @@ const AvatarWrapper = styled.div<{ shape: 'circle' | 'round' | 'square' }>`
   display: inline-block;
   border: 1px solid #dadada;
   border-radius: ${({ shape }) => ShapeToCssVal[shape]};
+  &:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+  }
 
   overflow: hidden;
   > img {

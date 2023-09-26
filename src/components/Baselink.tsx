@@ -11,27 +11,28 @@ export default function Baselink({
   emoji: string;
 }) {
   return (
-    <Link href={link} style={linkStyle}>
+    <Link href={link} style={linkStyle} className='base-item'>
       <div style={emojiStyle}>{emoji}</div>
       <div style={titleStyle}>{title}</div>
     </Link>
   );
 }
 
-const linkStyle: CSSProperties = {
+const linkStyle : CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-
   width: '5.5rem',
   height: '5.5rem',
   borderRadius: '50%',
-
   textDecoration: 'none',
   color: 'black',
-  backgroundColor: 'rgba(225,225,225,0.7)',
+  backgroundColor: 'rgba(225, 225, 225, 0.7)',
+  cursor: 'pointer',
+  transition: 'all 0.3s ease-in-out',
 };
+
 
 const emojiStyle: CSSProperties = {
   fontSize: '1.2rem',

@@ -72,12 +72,13 @@ const clockStyle: CSSProperties = {
   fontSize: '10rem',
   color: 'white',
   fontWeight: 'bold',
-  textShadow: '0 0 10px rgba(0,0,0,0.7)',
+  textShadow: '0 0 10px rgba(0,0,0,0.8)',
 };
 const DdayStyle: CSSProperties = {
   fontSize: '3rem',
   color: 'white',
-  textShadow: '0 0 10px rgba(0,0,0,0.7)',
+  textShadow: '0 0 10px rgba(0,0,0,0.8)',
+  fontWeight:'700'
 
 };
 

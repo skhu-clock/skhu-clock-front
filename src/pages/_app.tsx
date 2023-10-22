@@ -5,13 +5,21 @@ import '../styles/index.css';
 import { ThemeProvider } from '@mui/system';
 import theme from '@/styles/theme';
 
+import { Dongle } from 'next/font/google';
+
+const roboto = Dongle({
+  weight: '400',
+  subsets: ['latin'],
+});
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider theme={theme}>
-      <div css={mainHome}>
-        <Component {...pageProps} />
-      </div>
-    </ThemeProvider>
+    <main className={roboto.className}>
+      <ThemeProvider theme={theme}>
+        <div css={mainHome}>
+          <Component {...pageProps} />
+        </div>
+      </ThemeProvider>
+    </main>
   );
 }
 
@@ -22,6 +30,4 @@ const mainHome = css`
   justify-content: center;
   width: auto;
   height: 100vh;
-
-  font-family: 'Noto Sans KR', sans-serif;
 `;

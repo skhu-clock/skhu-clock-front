@@ -111,6 +111,7 @@ body {
   background-image: url('/background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  font-family: , sans-serif;
 }
 ol,
 ul {
@@ -139,7 +140,6 @@ table {
 }
 
 .notice-item {
-
   &:hover {
     font-weight: 700;
   }

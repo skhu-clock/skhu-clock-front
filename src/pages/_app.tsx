@@ -5,9 +5,9 @@ import '../styles/index.css';
 import { ThemeProvider } from '@mui/system';
 import theme from '@/styles/theme';
 
-import { Dongle } from 'next/font/google';
+import { Do_Hyeon } from 'next/font/google';
 
-const roboto = Dongle({
+const roboto = Do_Hyeon({
   weight: '400',
   subsets: ['latin'],
 });

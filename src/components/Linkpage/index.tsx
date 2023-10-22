@@ -1,10 +1,9 @@
-import { CSSProperties} from 'react';
+import { CSSProperties } from 'react';
 import links from '../constants/links';
 import Baselink from '../Baselink';
-import {getFullYmdStr} from '../../hooks/useTime';
+import { getFullYmdStr } from '../../hooks/useTime';
 
 const Linkpage = () => {
-
   // 시간
   const hour = ('0' + new Date().getHours().toString()).slice(-2);
   const minute = ('0' + new Date().getMinutes().toString()).slice(-2);
@@ -69,7 +68,7 @@ const dateStyle: CSSProperties = {
 };
 
 const clockStyle: CSSProperties = {
-  fontSize: '10rem',
+  fontSize: '8rem',
   color: 'white',
   fontWeight: 'bold',
   textShadow: '0 0 10px rgba(0,0,0,0.8)',
@@ -78,8 +77,7 @@ const DdayStyle: CSSProperties = {
   fontSize: '3rem',
   color: 'white',
   textShadow: '0 0 10px rgba(0,0,0,0.8)',
-  fontWeight:'700'
-
+  fontWeight: '700',
 };
 
 const DdayHighlightStyle: CSSProperties = {

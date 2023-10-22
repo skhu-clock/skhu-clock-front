@@ -7,7 +7,6 @@ import type { WeatherApi } from '@/types';
 import { Avatar } from '..';
 
 const WeatherRenderItem = ({ weather }: WeatherApi) => {
-  
   /*
   1. 날씨 데이터를 받아온다.
   2. 날씨 데이터의 SKY 값이 어떤지 확인한다.
@@ -21,7 +20,7 @@ const WeatherRenderItem = ({ weather }: WeatherApi) => {
   return (
     <WeatherContainer>
       <WeatherTitle>{weather.forecastTime + '시'}</WeatherTitle>
-      
+
       <WeatherContainer>
         {Number(weather.precipitation) > 70 ? (
           <Avatar
@@ -31,7 +30,7 @@ const WeatherRenderItem = ({ weather }: WeatherApi) => {
             shape="round"
             src={'/rainy.png'}
           />
-        ) : Number(weather.sky) === 4 || Number(weather.sky) === 3? (
+        ) : Number(weather.sky) === 4 || Number(weather.sky) === 3 ? (
           <Avatar
             size={32}
             alt="이미지"
@@ -64,9 +63,10 @@ const WeatherList = () => {
       {!isLoading && (
         <List
           renderItem={WeatherRenderItem}
-          items={weather?.slice(0, 4) || []}
+          items={weather?.slice(0, 5) || []}
           listStyle={{
             display: 'flex',
+            alignItems: 'center',
           }}
         />
       )}

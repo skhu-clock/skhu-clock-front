@@ -1,10 +1,10 @@
-import { useState } from 'react';
 import styled from '@emotion/styled';
 import { useWeatherAPi } from '@/hooks/useWeatherApi';
 import List from '../Common/List';
 import Skeleton from '../Common/Skeleton';
 import type { WeatherApi } from '@/types';
 import { Avatar } from '..';
+
 
 const WeatherRenderItem = ({ weather }: WeatherApi) => {
   /*
@@ -20,7 +20,6 @@ const WeatherRenderItem = ({ weather }: WeatherApi) => {
   return (
     <WeatherContainer>
       <WeatherTitle>{weather.forecastTime + '시'}</WeatherTitle>
-
       <WeatherContainer>
         {Number(weather.precipitation) > 70 ? (
           <Avatar
@@ -48,7 +47,9 @@ const WeatherRenderItem = ({ weather }: WeatherApi) => {
           />
         )}
         <WeatherContent>{weather.temp + '도'}</WeatherContent>
+       
       </WeatherContainer>
+      <p>강수:{weather.precipitation}%</p>
     </WeatherContainer>
   );
 };

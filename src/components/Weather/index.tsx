@@ -59,7 +59,7 @@ const WeatherList = () => {
 
   return (
     <>
-      {isLoading && <Skeleton.Box width={450} height={180} />}
+      {isLoading && <Skeleton.Box width={700} height={180} />}
 
       {!isLoading && (
         <List

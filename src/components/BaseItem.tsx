@@ -4,18 +4,25 @@ export default function BaseItem({
   title,
   subtitle,
   innerContent,
+  width,
+  height,
+  flexDirection
 }: {
   title: string;
   subtitle: string;
   innerContent: React.ReactNode | React.ReactNode[];
+  width?:number;
+  height?:number;
+  flexDirection?:'row' | 'column'
 }) {
   const sectionStyle: CSSProperties = {
     fontWeight: 'normal',
     fontStyle: 'normal',
-    width: '30rem',
+    width: width ?? '30rem' ,
+    height: height,
     display: 'flex',
     justifyContent: 'space-around',
-    flexDirection: 'column',
+    flexDirection: flexDirection ?? 'column',
     minHeight: '17rem',
     backgroundColor: 'rgba(255,255,255,0.56)',
     color: 'black',

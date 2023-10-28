@@ -6,7 +6,11 @@ export type ButtonProps = ComponentProps<'button'> & {
   disabled?: boolean;
   outlined?: boolean;
 };
-
+export type MenuAPi = {
+  id:string;
+  name:string;
+  price:number;
+}
 
 export type ResturantApi = { 
   id:number

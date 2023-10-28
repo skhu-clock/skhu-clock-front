@@ -1,9 +1,18 @@
 import React, { CSSProperties, WheelEvent, useRef, useState } from 'react';
 import { BaseItem, BaseCalendar} from '@/components';
-import page from '@/components/constants/page';
+import PAGE from '@/components/constants/page';
 import Linkpage from '@/components/Linkpage';
+import type { MenuAPi } from '@/types';
 
-export default function Home() {
+
+export const getStaticProps = (async () => {
+  const res = await fetch('https://skhu-clock-front.vercel.app/api/menu');
+  const menu:MenuAPi[] = await res.json();
+  return { props: { menu } };
+}); 
+
+
+export default function Home({menu}:{menu:MenuAPi[]}) {
   // 쌉 쌉 하드코디디딩 이러믄 안돼~
   // 사실 그래서 배열로 려고했는디 뭔가뭔가 이상해짐 ㅇㅇ
   // reallly 훅으로 만들어서 쓸라그랬는디 저기다가 넣으니까 또 안돼 ㅇㅇ
@@ -11,9 +20,10 @@ export default function Home() {
   const element = useRef<HTMLDivElement>(null);
   const element1 = useRef<HTMLDivElement>(null);
   const element2 = useRef<HTMLDivElement>(null);
-
+  const element3 = useRef<HTMLDivElement>(null);
+  const element4 = useRef<HTMLDivElement>(null);
   // 쌉쌉 하드코디리디리디링한 useRef 배열로 묶어버리기~
-  const eleArr = [element, element1, element2];
+  const eleArr = [element, element1, element2,element3,element4];
 
   // 원하는 div로 이동하는 함수우미양가
   const onMoveToElement = (index: number) => {
@@ -30,8 +40,8 @@ export default function Home() {
   const onHandelWheel = (e: WheelEvent<HTMLDivElement>) => {
     if (e.deltaY > 0) {
       // 휠을 아래로 스크롤할 때
-      onMoveToElement(Math.min(currentScroll + 1, 2));
-      setCurrentScroll(Math.min(currentScroll + 1, 2));
+      onMoveToElement(Math.min(currentScroll + 1, 4));
+      setCurrentScroll(Math.min(currentScroll + 1, 4));
     } else {
       // 휠을 위로 스크롤할 때
       onMoveToElement(Math.max(currentScroll - 1, 0));
@@ -56,16 +66,19 @@ export default function Home() {
   return (
     <div style={indexStyles}>
       <div style={linkDivStyles} onWheel={onHandelWheelDebounced} ref={eleArr[0]}>
-        <Linkpage />
+        <Linkpage randomMenu={menu[Math.floor(Math.random() * menu.length)]}/>
       </div>
 
       <div style={contantsDivStyles} ref={eleArr[1]} onWheel={onHandelWheelDebounced}>
         <div style={contantsStyles}>
-          {page.map(({ item }) => (
+          {PAGE.firstPage.map(({ item }) => (
             <BaseItem
               key={item.title}
               title={item.title}
               subtitle={item.subtitle}
+              width={700}
+              height={300}
+              flexDirection = 'column'
               innerContent={item.innerContent()}
             />
           ))}
@@ -75,7 +88,42 @@ export default function Home() {
       <div ref={eleArr[2]} style={callenderStyles} onWheel={onHandelWheelDebounced}>
         <BaseCalendar />
       </div>
+
+      <div ref={eleArr[3]} style={callenderStyles} onWheel={onHandelWheelDebounced}>
+        <div style={contantsStyles}>
+          {PAGE.page.map(({ item }) => (
+            <BaseItem
+              key={item.title}
+              title={item.title}
+              subtitle={item.subtitle}
+              width={700}
+              height={300}
+              flexDirection = 'column'
+              innerContent={item.innerContent()}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div style={contantsDivStyles} ref={eleArr[4]} onWheel={onHandelWheelDebounced}>
+        <div style={contantsStyles}>
+          {PAGE.lastPage.map(({ item }) => (
+            <BaseItem
+              key={item.title}
+              title={item.title}
+              subtitle={item.subtitle}
+              width={700}
+              height={400}
+              flexDirection = 'column'
+              innerContent={item.innerContent()}
+            />
+          ))}
+        </div>
+      </div>
     </div>
+
+    
+    
   );
 }
 

@@ -44,7 +44,7 @@ const NoticeList = () => {
   return (
     <>
       {isLoading ? (
-        <Skeleton.Box width={450} height={180} />
+        <Skeleton.Box width={700} height={180} />
       ) : (
         <>
           <div

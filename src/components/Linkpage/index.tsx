@@ -2,8 +2,9 @@ import { CSSProperties } from 'react';
 import links from '../constants/links';
 import Baselink from '../Baselink';
 import { getFullYmdStr } from '../../hooks/useTime';
+import { MenuAPi } from '@/types';
 
-const Linkpage = () => {
+const Linkpage = ({randomMenu}:{randomMenu:MenuAPi}) => {
   // 시간
   const hour = ('0' + new Date().getHours().toString()).slice(-2);
   const minute = ('0' + new Date().getMinutes().toString()).slice(-2);
@@ -37,6 +38,10 @@ const Linkpage = () => {
       </span>
       <span style={DdayStyle}>
         종강까지 약 <span style={DdayHighlightStyle}>{dDay}일</span> 남았습니다!
+      </span>
+
+      <span style={MenuStyle}>
+      🤗 오늘은 {randomMenu.name} 어떠신가요?
       </span>
       <div style={linklistStyle}>
         {links.map(({ item }) => (
@@ -75,6 +80,13 @@ const clockStyle: CSSProperties = {
 };
 const DdayStyle: CSSProperties = {
   fontSize: '3rem',
+  color: 'white',
+  textShadow: '0 0 10px rgba(0,0,0,0.8)',
+  fontWeight: '700',
+};
+
+const MenuStyle: CSSProperties = {
+  fontSize: '1.3rem',
   color: 'white',
   textShadow: '0 0 10px rgba(0,0,0,0.8)',
   fontWeight: '700',

@@ -6,7 +6,7 @@ import type { MenuAPi } from '@/types';
 
 
 export const getStaticProps = (async () => {
-  const res = await fetch('https://skhu-clock-front.vercel.app/api/menu');
+  const res = await fetch('http://skhuclock.duckdns.org/api/menus');
   const menu:MenuAPi[] = await res.json();
   return { props: { menu } };
 }); 

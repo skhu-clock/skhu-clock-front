@@ -3,7 +3,6 @@ import { useWeatherAPi } from '@/hooks/useWeatherApi';
 import List from '../Common/List';
 import Skeleton from '../Common/Skeleton';
 import type { WeatherApi } from '@/types';
-import { Avatar } from '..';
 import Image from 'next/image';
 
 const WeatherRenderItem = ({ weather }: WeatherApi) => {
@@ -15,24 +14,12 @@ const WeatherRenderItem = ({ weather }: WeatherApi) => {
   */
   return (
     <WeatherContainer>
-      <WeatherTitle>{weather.forecastTime.slice(0,-2) + '시'}</WeatherTitle>
+      <WeatherTitle>{weather.forecastTime.slice(0, -2) + '시'}</WeatherTitle>
       <WeatherContainer>
         {Number(weather.precipitation) > 70 ? (
-          <Avatar
-            size={100}
-            alt="이미지"
-            mode="cover"
-            shape="round"
-            src={'/rainy.png'}
-          />
+          <Image width={100} height={100} alt="이미지" src={'/rainy.png'} />
         ) : Number(weather.sky) === 4 || Number(weather.sky) === 3 ? (
-          <Avatar
-            size={100}
-            alt="이미지"
-            mode="cover"
-            shape="round"
-            src={'/cloudy.png'}
-          />
+          <Image width={100} height={100} alt="이미지" src={'/cloudy.png'} />
         ) : (
           <Image width={100} height={100} alt="이미지" src={'/sunnyday.png'} />
         )}
@@ -76,7 +63,6 @@ const WeatherContainer = styled.div`
   margin: 0 auto;
   padding-bottom: 1rem;
   flex: 1;
-
 `;
 
 const WeatherTitle = styled.div`

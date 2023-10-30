@@ -4,7 +4,7 @@ import List from '../Common/List';
 import Skeleton from '../Common/Skeleton';
 import type { WeatherApi } from '@/types';
 import { Avatar } from '..';
-
+import Image from 'next/image';
 
 const WeatherRenderItem = ({ weather }: WeatherApi) => {
   /*
@@ -13,17 +13,13 @@ const WeatherRenderItem = ({ weather }: WeatherApi) => {
   3. SKY 값에 따라 다른 이미지를 표시한다.
   4. 현재는 렌더링이 너무 많이 되어 오류가 발생한다.
   */
-
-  // Instead of using multiple if statements, you can use a switch statement
-  // to make the code more concise and readable.
-
   return (
     <WeatherContainer>
-      <WeatherTitle>{weather.forecastTime + '시'}</WeatherTitle>
+      <WeatherTitle>{weather.forecastTime.slice(0,-2) + '시'}</WeatherTitle>
       <WeatherContainer>
         {Number(weather.precipitation) > 70 ? (
           <Avatar
-            size={32}
+            size={100}
             alt="이미지"
             mode="cover"
             shape="round"
@@ -31,25 +27,18 @@ const WeatherRenderItem = ({ weather }: WeatherApi) => {
           />
         ) : Number(weather.sky) === 4 || Number(weather.sky) === 3 ? (
           <Avatar
-            size={32}
+            size={100}
             alt="이미지"
             mode="cover"
             shape="round"
             src={'/cloudy.png'}
           />
         ) : (
-          <Avatar
-            size={32}
-            alt="이미지"
-            mode="cover"
-            shape="round"
-            src={'/sunnyday.png'}
-          />
+          <Image width={100} height={100} alt="이미지" src={'/sunnyday.png'} />
         )}
         <WeatherContent>{weather.temp + '도'}</WeatherContent>
-       
+        <p>강수:{weather.precipitation}%</p>
       </WeatherContainer>
-      <p>강수:{weather.precipitation}%</p>
     </WeatherContainer>
   );
 };
@@ -77,18 +66,20 @@ const WeatherList = () => {
 export default WeatherList;
 
 const WeatherContainer = styled.div`
-  width: 80px;
-  background-color: #f1f1f1;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  width: 11rem;
+  height: 11rem;
+  margin: 0 auto;
+  padding-bottom: 1rem;
   flex: 1;
+
 `;
 
 const WeatherTitle = styled.div`
-  background-color: white;
   color: black;
   font-weight: 700;
   font-size: 18px;

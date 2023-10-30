@@ -20,8 +20,8 @@ const firstPage: Page[] = [
   },
   {
     item: {
-      title: '날씨정보',
-      subtitle: '날씨 정보를 확인할 수 있습니다.',
+      title: '오늘의 날씨정보',
+      subtitle: '',
       innerContent: WeatherList,
     },
   },

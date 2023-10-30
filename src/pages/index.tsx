@@ -1,18 +1,18 @@
 import React, { CSSProperties, WheelEvent, useRef, useState } from 'react';
-import { BaseItem, BaseCalendar} from '@/components';
+import { BaseItem, MenuList } from '@/components';
 import PAGE from '@/components/constants/page';
 import Linkpage from '@/components/Linkpage';
 import type { MenuAPi } from '@/types';
+import RandonMenu from '@/components/RandomMenu';
+import RestaruarntList from '@/components/RestaruarntList';
 
-
-export const getStaticProps = (async () => {
+export const getStaticProps = async () => {
   const res = await fetch('http://skhuclock.duckdns.org/api/menus');
-  const menu:MenuAPi[] = await res.json();
+  const menu: MenuAPi[] = await res.json();
   return { props: { menu } };
-}); 
+};
 
-
-export default function Home({menu}:{menu:MenuAPi[]}) {
+export default function Home({ menu }: { menu: MenuAPi[] }) {
   // 쌉 쌉 하드코디디딩 이러믄 안돼~
   // 사실 그래서 배열로 려고했는디 뭔가뭔가 이상해짐 ㅇㅇ
   // reallly 훅으로 만들어서 쓸라그랬는디 저기다가 넣으니까 또 안돼 ㅇㅇ
@@ -22,7 +22,7 @@ export default function Home({menu}:{menu:MenuAPi[]}) {
   const element2 = useRef<HTMLDivElement>(null);
   const element3 = useRef<HTMLDivElement>(null);
   // 쌉쌉 하드코디리디리디링한 useRef 배열로 묶어버리기~
-  const eleArr = [element, element1, element2,element3];
+  const eleArr = [element, element1, element2, element3];
 
   // 원하는 div로 이동하는 함수우미양가
   const onMoveToElement = (index: number) => {
@@ -45,13 +45,13 @@ export default function Home({menu}:{menu:MenuAPi[]}) {
       // 휠을 위로 스크롤할 때
       onMoveToElement(Math.max(currentScroll - 1, 0));
       setCurrentScroll(Math.max(currentScroll - 1, 0));
-    }    
+    }
   };
 
   // 디바운스 함수
   const debounce = (callback: Function, delay: number) => {
     let timeoutId: NodeJS.Timeout;
-    return function(this: any, ...args: any[]) {
+    return function (this: any, ...args: any[]) {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
         callback.apply(this, args);
@@ -59,16 +59,24 @@ export default function Home({menu}:{menu:MenuAPi[]}) {
     };
   };
 
-  // 500ms 딜레이로 호출  
-  const onHandelWheelDebounced = debounce(onHandelWheel, 500); 
+  // 500ms 딜레이로 호출
+  const onHandelWheelDebounced = debounce(onHandelWheel, 500);
 
   return (
     <div style={indexStyles}>
-      <div style={linkDivStyles} onWheel={onHandelWheelDebounced} ref={eleArr[0]}>
-        <Linkpage randomMenu={menu[Math.floor(Math.random() * menu.length)]}/>
+      <div
+        style={linkDivStyles}
+        onWheel={onHandelWheelDebounced}
+        ref={eleArr[0]}
+      >
+        <Linkpage randomMenu={menu[Math.floor(Math.random() * menu.length)]} />
       </div>
 
-      <div style={contantsDivStyles} ref={eleArr[1]} onWheel={onHandelWheelDebounced}>
+      <div
+        style={contantsDivStyles}
+        ref={eleArr[1]}
+        onWheel={onHandelWheelDebounced}
+      >
         <div style={contantsStyles}>
           {PAGE.firstPage.map(({ item }) => (
             <BaseItem
@@ -77,14 +85,18 @@ export default function Home({menu}:{menu:MenuAPi[]}) {
               subtitle={item.subtitle}
               width={700}
               height={300}
-              flexDirection = 'column'
+              flexDirection="column"
               innerContent={item.innerContent()}
             />
           ))}
         </div>
       </div>
 
-      <div ref={eleArr[2]} style={contantsDivStyles} onWheel={onHandelWheelDebounced}>
+      <div
+        ref={eleArr[2]}
+        style={contantsDivStyles}
+        onWheel={onHandelWheelDebounced}
+      >
         <div style={contantsStyles}>
           {PAGE.page.map(({ item }) => (
             <BaseItem
@@ -93,32 +105,27 @@ export default function Home({menu}:{menu:MenuAPi[]}) {
               subtitle={item.subtitle}
               width={700}
               height={300}
-              flexDirection = 'column'
+              flexDirection="column"
               innerContent={item.innerContent()}
             />
           ))}
         </div>
       </div>
 
-      <div style={contantsDivStyles} ref={eleArr[3]} onWheel={onHandelWheelDebounced}>
+      <div
+        style={contantsDivStyles}
+        ref={eleArr[3]}
+        onWheel={onHandelWheelDebounced}
+      >
         <div style={contantsStyles}>
-          {PAGE.lastPage.map(({ item }) => (
-            <BaseItem
-              key={item.title}
-              title={item.title}
-              subtitle={item.subtitle}
-              width={700}
-              height={400}
-              flexDirection = 'column'
-              innerContent={item.innerContent()}
-            />
-          ))}
+          <MenuList />
+          <div>
+            <RandonMenu />
+            <RestaruarntList />
+          </div>
         </div>
       </div>
     </div>
-
-    
-    
   );
 }
 
@@ -156,13 +163,4 @@ const contantsStyles: CSSProperties = {
   maxWidth: '80%',
   animation: 'fadeIn 1s linear',
   zIndex: 1,
-};
-
-const callenderStyles: CSSProperties = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '100%',
-  height: '100vh',
 };

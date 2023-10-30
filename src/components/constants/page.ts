@@ -1,5 +1,6 @@
 import { MenuList, NoticeList, SubwayList, WeatherList, BaseCalendar } from '@/components';
-import RestaruarntList from '../Restaurant';
+import RestaruarntList from '../RestaruarntList';
+import RandonMenu from '../RandomMenu';
 
 type Page = {
   item: {
@@ -47,17 +48,24 @@ const lastPage: Page[] = [
   {
     item: {
       title: '국수나무메뉴',
-      subtitle: '국순나무 메뉴를 확인할 수 있습니다.',
+      subtitle: '',
       innerContent: MenuList,
     },
   },
-  // {
-  //   item: {
-  //     title: '근처 식당',
-  //     subtitle: '성공회대 반경 800M 이내의 식당을 확인할 수 있습니다.',
-  //     innerContent: RestaruarntList,
-  //   },
-  // },
+  {
+    item: {
+      title: '국수나무 메뉴 추천',
+      subtitle: '',
+      innerContent: RandonMenu,
+    },
+  },
+  {
+    item: {
+      title: '근처 식당',
+      subtitle: '성공회대 반경 800M 이내의 식당을 확인할 수 있습니다.',
+      innerContent: RestaruarntList,
+    },
+  },
 ];
 
 const PAGE = {

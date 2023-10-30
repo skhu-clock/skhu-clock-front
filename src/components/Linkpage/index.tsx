@@ -4,41 +4,17 @@ import Baselink from '../Baselink';
 import { getFullYmdStr } from '../../hooks/useTime';
 import { MenuAPi } from '@/types';
 import DDay from '../DDay';
+import CurTime from '../CurTime';
 
 const Linkpage = ({randomMenu}:{randomMenu:MenuAPi}) => {
-  // 시간
-  const hour = ('0' + new Date().getHours().toString()).slice(-2);
-  const minute = ('0' + new Date().getMinutes().toString()).slice(-2);
-  /*
-  // 시간 계산기
-  // 여기부터는 되면 좋은거 시간차까지 나오는거 ㅇㅇ
-  // 총 날짜
-  const timeStamp = new Date().getTime();
-  // 문자로 만들어서 월, 일, 년도, 시간, 분, 초로 나누기
-  const timeStampdate = new Date(timeStamp).toString().substring(4, 24);
-  // 월, 일, 년도, 초배열로 만들기
-  const timeStampArr = timeStampdate.split(' ');
-  // 시간 배열로 만들기
-  const timeArr = timeStampArr[3].split(':');
-*/
-
-  // 종강까지 남은 날짜 계산기
-  // 나중에 훅으로 뺄 수있을듯?
-  const datenow = new Date().getTime(); // 현재 날짜
-  const dateend = new Date('2023-12-18').getTime(); // 종강 날짜
-  const dateDiff = dateend - datenow; // 종강 날짜 - 현재 날짜
-  const dDay = Math.abs(dateDiff / (1000 * 60 * 60 * 24)) // 날짜 차이 계산
-    .toString() // 문자열로 변환
-    .substring(0, 2); // 남은 일 수만 보이게 앞에서부터 두자리 자르기
 
   return (
     <div style={basicStyle}>
       <span style={dateStyle}>{getFullYmdStr()}</span>
-      <span style={clockStyle}>
-        {hour} : {minute}
-      </span>
+      <span></span>
+      <CurTime />
       <span style={DdayStyle}>
-        종강까지 약 <span style={DdayHighlightStyle}>{dDay}일</span> 남았습니다!
+        23년 2학기 종강까지
       </span>
       <DDay />
 
@@ -74,17 +50,11 @@ const dateStyle: CSSProperties = {
   fontWeight: 'bold',
 };
 
-const clockStyle: CSSProperties = {
-  fontSize: '8rem',
-  color: 'white',
-  fontWeight: 'bold',
-  textShadow: '0 0 10px rgba(0,0,0,0.8)',
-};
 const DdayStyle: CSSProperties = {
-  fontSize: '3rem',
+  fontSize: '2.5rem',
   color: 'white',
   textShadow: '0 0 10px rgba(0,0,0,0.8)',
-  fontWeight: '700',
+  fontWeight: '500',
 };
 
 const MenuStyle: CSSProperties = {
@@ -92,10 +62,6 @@ const MenuStyle: CSSProperties = {
   color: 'white',
   textShadow: '0 0 10px rgba(0,0,0,0.8)',
   fontWeight: '700',
-};
-
-const DdayHighlightStyle: CSSProperties = {
-  color: 'red',
 };
 
 const linklistStyle: CSSProperties = {

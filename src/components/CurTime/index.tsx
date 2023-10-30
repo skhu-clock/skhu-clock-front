@@ -1,37 +1,28 @@
-import type { CurTimeProps } from '@/types';
+import { CSSProperties } from 'react';
+import { useEffect, useState } from 'react';
 
-const CurTime = ({ year, month, date, hour }: CurTimeProps) => {
-  const HOUR_MESSAGE = () => {
-    if (hour >= 12 && hour <= 17) {
-      return '좋은 오후입니다, ☕ 한잔 어떠신가요';
-    }
-    if (hour >= 18 && hour <= 20) {
-      return '행복한 저녁보내세요 🍯';
-    }
+const CurTime = () => {
+  const [time, setTime] = useState(new Date());
 
-    if (hour >= 21 && hour <= 24) {
-      return '오늘도 고생하셨어요 😊';
-    }
-  };
+  useEffect(() => {
+    const timeid = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+    return () => clearInterval(timeid);
+  }, []);
 
   return (
-    <div
-      style={{
-        fontSize: '1.875rem',
-        color: '#fff',
-      }}
-    >
-      <div>{year + ' ' + month + ' ' + date}</div>
-      <div
-        style={{
-          fontSize: '1.75rem',
-          color: '#fff',
-        }}
-      >
-        {HOUR_MESSAGE()}
-      </div>
+    <div style={clockStyle}>
+      {time.getHours()} : {time.getMinutes()}
     </div>
   );
 };
 
 export default CurTime;
+
+const clockStyle: CSSProperties = {
+  fontSize: '8rem',
+  color: 'white',
+  fontWeight: 'bold',
+  textShadow: '0 0 10px rgba(0,0,0,0.8)',
+};

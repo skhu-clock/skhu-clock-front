@@ -20,28 +20,12 @@ interface ResturantApi {
   addressName: string;
 }
 
-const Data = styled.a`
-  width: 20rem;
-  padding: 0 0.3125rem;
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: inherit;
-  text-decoration: none;
-
-  &:hover {
-    cursor: pointer;
-    color: '#e1e1e1';
-  }
-`;
-
 const renderRestarutList = (items: RestrantObj) => {
   return (
-    <div key={items.restaurant.id} className='notice-item'>
-      <Data
+    <div key={items.restaurant.id} className="notice-item">
+      <RestaruantStyle
         href={items.restaurant.placeUrl}
-      >{`[${items.restaurant.categoryName}]${items.restaurant.name}`}</Data>
+      >{`[${items.restaurant.categoryName}]${items.restaurant.name}`}</RestaruantStyle>
     </div>
   );
 };
@@ -69,14 +53,16 @@ const RestaruarntList = () => {
     if (initPage - 5 >= 0) setPage(initPage - 5);
   };
   return (
-    <>
+    <RestaruantWapper>
+      <H1Style>근처 식당</H1Style>
       {isLoading ? (
         <Skeleton.Box width={450} height={180} />
       ) : (
-        <>
+        <div>
           <div
             style={{
               width: '21.875rem',
+              paddingLeft: '2rem',
             }}
           >
             <ApiList
@@ -92,48 +78,83 @@ const RestaruarntList = () => {
             style={{
               display: 'flex',
               justifyContent: 'center',
-              width: '5rem',
+              alignItems: 'center',
             }}
           >
-            <Image
-              src="/left.png"
-              width={30}
-              height={30}
-              onClick={handleClickPrevPage}
-              alt={''}
+            <div
               style={{
-                cursor: 'pointer',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '5rem',
+                marginTop: '1rem',
               }}
-            ></Image>
-            {initPage / 5 + 1}
-            <Image
-              src="/righth.png"
-              width={30}
-              height={30}
-              onClick={handleClickNextPage}
-              alt={''}
-              style={{
-                cursor: 'pointer',
-              }}
-            ></Image>
+            >
+              <Image
+                src="/left.png"
+                width={30}
+                height={30}
+                onClick={handleClickPrevPage}
+                alt={''}
+                style={{
+                  cursor: 'pointer',
+                }}
+              ></Image>
+              {initPage / 5 + 1}
+              <Image
+                src="/righth.png"
+                width={30}
+                height={30}
+                onClick={handleClickNextPage}
+                alt={''}
+                style={{
+                  cursor: 'pointer',
+                }}
+              ></Image>
+            </div>
           </div>
-        </>
+        </div>
       )}
-    </>
+    </RestaruantWapper>
   );
 };
 
 export default RestaruarntList;
 
-const NoticeLinkStyle = styled.a`
-  width: 20rem;
-  padding: 0 0.3125rem;
+const RestaruantWapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+
+  font-weight: normal;
+  font-style: normal;
+  width: 29rem;
+  height: 18.75rem;
+  min-height: 17rem;
+  background-color: rgba(255, 255, 255, 0.56);
+  color: black;
+
+  border-radius: 2rem;
+`;
+
+const H1Style = styled.h1`
+  color: black;
+  font-size: 2rem;
+  font-weight: 700;
+
+  padding-top: 0.5rem;
+  padding-left: 2rem;
+`;
+
+const RestaruantStyle = styled.a`
+  width: 100%;
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   color: inherit;
   text-decoration: none;
+  text-align: left;
 
   &:hover {
     cursor: pointer;

@@ -14,7 +14,7 @@ const firstPage: Page[] = [
   {
     item: {
       title: '학사공지',
-      subtitle: '최근 올라온 15개의 학사 공지를 보여드립니다.',
+      subtitle: '* 최근 올라온 15개의 학사 공지를 보여드립니다.',
       innerContent: NoticeList,
     },
   },

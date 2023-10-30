@@ -7,14 +7,14 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 const NoticeLinkStyle = styled.a`
-  width: 20rem;
-  padding: 0 0.3125rem;
+  width: 100%;
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   color: inherit;
   text-decoration: none;
+  text-align: left;
 
   &:hover {
     cursor: pointer;
@@ -46,10 +46,10 @@ const NoticeList = () => {
       {isLoading ? (
         <Skeleton.Box width={700} height={180} />
       ) : (
-        <>
+        <div>
           <div
             style={{
-              width: '21.875rem',
+              width: '50%',
             }}
           >
             <ApiList
@@ -65,52 +65,54 @@ const NoticeList = () => {
               }
             />
           </div>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              width: '5rem',
-            }}
-          >
-            <Image
-              src="/left.png"
-              width={30}
-              height={30}
-              onClick={handleClickPrevPage}
-              alt={''}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '95%',
+          }}>
+            <div
               style={{
-                cursor: 'pointer',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '5rem',
+                marginTop: '0.5rem',
               }}
-            ></Image>
-            {initPage / 5 + 1}
-            <Image
-              src="/righth.png"
-              width={30}
-              height={30}
-              onClick={handleClickNextPage}
-              alt={''}
-              style={{
-                cursor: 'pointer',
-              }}
-            ></Image>
+            >
+              <Image
+                src="/left.png"
+                width={30}
+                height={30}
+                onClick={handleClickPrevPage}
+                alt={''}
+                style={{
+                  cursor: 'pointer',
+                }}
+              ></Image>
+              <div
+                style={{
+                  textAlign: 'center',
+                }}
+              >
+                {initPage / 5 + 1}
+              </div>
+              <Image
+                src="/righth.png"
+                width={30}
+                height={30}
+                onClick={handleClickNextPage}
+                alt={''}
+                style={{
+                  cursor: 'pointer',
+                }}
+              ></Image>
+            </div>
           </div>
-        </>
+        </div>
       )}
     </>
   );
 };
 
 export default NoticeList;
-
-const BtnStyle = styled.button`
-  all: unset;
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 1px solid #dadada;
-  border-radius: 50%;
-  background-color: #d1d1d1;
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-  }
-`;

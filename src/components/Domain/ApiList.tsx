@@ -18,9 +18,9 @@ const ApiList = <T extends {}>({ items, renderItem }: ListProps<T>) => {
           flexWrap: 'wrap',
           flexDirection: 'row',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'left',
           width: '100%',
-          gap: '1rem',
+          gap: '0.625rem',
         }}
       />
     </ListWrapper>

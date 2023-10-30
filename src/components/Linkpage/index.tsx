@@ -3,6 +3,7 @@ import links from '../constants/links';
 import Baselink from '../Baselink';
 import { getFullYmdStr } from '../../hooks/useTime';
 import { MenuAPi } from '@/types';
+import DDay from '../DDay';
 
 const Linkpage = ({randomMenu}:{randomMenu:MenuAPi}) => {
   // 시간
@@ -39,6 +40,7 @@ const Linkpage = ({randomMenu}:{randomMenu:MenuAPi}) => {
       <span style={DdayStyle}>
         종강까지 약 <span style={DdayHighlightStyle}>{dDay}일</span> 남았습니다!
       </span>
+      <DDay />
 
       <span style={MenuStyle}>
       🤗 오늘은 {randomMenu.name} 어떠신가요?

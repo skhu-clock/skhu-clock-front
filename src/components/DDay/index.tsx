@@ -1,122 +1,59 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-import { ChangeEvent, useState } from 'react';
+import { Devonshire } from 'next/font/google';
+import { useEffect, useState } from 'react';
 
-const DateCalender = () => {
-  const [startDate, setStartDate] = useState<string>(new Date().toDateString());
-  const [endtDate, setEndDate] = useState<string>(new Date().toDateString());
+const DDay = () => {
+  const setDate = new Date('2023-12-18');
+  const today = new Date();
 
-  // console.log('오늘 날짜', datenow.getTime());
+  const dis = setDate.getTime() - today.getTime();
+  const min = 1000 * 60;
 
-  // console.log('내가 누른 날짜', startDate);
+  const d = Math.floor(dis / (min * 60 * 24));
+  const h = Math.floor((dis % (min * 60 * 24)) / (min * 60));
+  const m = Math.floor((dis % (min * 60)) / min);
+  const s = Math.floor((dis % min) / 1000);
 
-  // console.log('날자 type', typeof startDate);
+  const [day, setDay] = useState(d);
+  const [hour, setHour] = useState(h);
+  const [minute, setMinute] = useState(m);
+  const [second, setSecond] = useState(s);
 
-  // console.log('날짜 추출', startDate);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (second > 0) {
+        setSecond(second - 1);
+      }
 
-  const dateDifference = () => {
-    const datenow = new Date(startDate).getTime();
-    const dateend = new Date(endtDate).getTime();
-
-    const dateDiff = dateend - datenow;
-
-    if (dateDiff === 0) {
-      return 'day';
-    } else {
-      return Math.abs(dateDiff / (1000 * 60 * 60 * 24));
-    }
-  };
-
-  const onChangeStartDate = (e: ChangeEvent<HTMLInputElement>) => {
-    setStartDate(e.target.value);
-  };
-
-  const onChangeEndtDate = (e: ChangeEvent<HTMLInputElement>) => {
-    if (new Date(startDate).getTime() > new Date(e.target.value).getTime()) {
-      alert('시작일이 종료일보다 늦습니다.'); // eslint-disable-line no-alert
-    } else {
-      setEndDate(e.target.value);
-      dateDifference();
-    }
-  };
-
-  const dateDiff = dateDifference();
+      if (second === 0) {
+        if (minute === 0) {
+          if (hour === 0) {
+            if (day === 0) {
+              clearInterval(timer);
+            } else {
+              setDay(day - 1);
+              setHour(23);
+              setMinute(59);
+              setSecond(59);
+            }
+          } else {
+            setHour(hour - 1);
+            setMinute(59);
+            setSecond(59);
+          }
+        } else {
+          setMinute(minute - 1);
+          setSecond(59);
+        } 
+      }
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [day, hour, minute, second]);
 
   return (
-    <div css={calenderContaner}>
-      <h1>D-day 계산기</h1>
-      <div css={dDaygroup}>
-        <div css={dDayInput}>
-          <label htmlFor="firstday">시작일</label>
-          <input
-            type="date"
-            name="firstday"
-            id="firstdate"
-            value={startDate}
-            onChange={onChangeStartDate}
-          />
-        </div>
-        <div css={dDayInput}>
-          <label htmlFor="lasttday">종료일</label>
-          <input
-            type="date"
-            name="lasttday"
-            id="lasttday"
-            value={endtDate}
-            onChange={onChangeEndtDate}
-          />
-        </div>
-      </div>
-      <div id="D-day">D-{dateDiff}</div>
+    <div>
+      {day} : {hour} : {minute} : {second}
     </div>
   );
 };
 
-export default DateCalender;
-
-const calenderContaner = css`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 40rem;
-  height: 20rem;
-  gap: 2rem;
-
-  background-color: rgba(255, 255, 255, 0.7);
-
-  border-radius: 1rem;
-  border: 0.1rem solid rgba(0, 0, 0, 0.2);
-
-  h1 {
-    font-size: 2rem;
-  }
-  input {
-    text-align: center;
-  }
-  div#D-day {
-    font-size: 3rem;
-  }
-`;
-
-const dDaygroup = css`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 30rem;
-  height: 5rem;
-  gap: 3rem;
-
-  border-bottom: 0.1rem solid rgba(0, 0, 0, 0.3);
-`;
-
-const dDayInput = css`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  gap: 0.5rem;
-  font-size: 1.5rem;
-`;
+export default DDay;

@@ -37,9 +37,9 @@ const links: Links[] = [
   },
   {
     item: {
-      title: '학사일정',
-      link: 'https://www.skhu.ac.kr/skhu/4166/subview.do',
-      emoji: '📅',
+      title: '기숙사',
+      link: 'https://skhu.happydorm.or.kr/',
+      emoji: '🏡',
     },
   },
 ];

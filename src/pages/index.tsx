@@ -2,17 +2,11 @@ import React, { CSSProperties, WheelEvent, useRef, useState } from 'react';
 import { BaseItem, MenuList } from '@/components';
 import PAGE from '@/components/constants/page';
 import Linkpage from '@/components/Linkpage';
-import type { MenuAPi } from '@/types';
+
 import RandonMenu from '@/components/RandomMenu';
 import RestaruarntList from '@/components/RestaruarntList';
 
-export const getStaticProps = async () => {
-  const res = await fetch('http://skhuclock.duckdns.org/api/menus');
-  const menu: MenuAPi[] = await res.json();
-  return { props: { menu } };
-};
-
-export default function Home({ menu }: { menu: MenuAPi[] }) {
+export default function Home() {
   // 쌉 쌉 하드코디디딩 이러믄 안돼~
   // 사실 그래서 배열로 려고했는디 뭔가뭔가 이상해짐 ㅇㅇ
   // reallly 훅으로 만들어서 쓸라그랬는디 저기다가 넣으니까 또 안돼 ㅇㅇ
@@ -69,7 +63,7 @@ export default function Home({ menu }: { menu: MenuAPi[] }) {
         onWheel={onHandelWheelDebounced}
         ref={eleArr[0]}
       >
-        <Linkpage randomMenu={menu[Math.floor(Math.random() * menu.length)]} />
+        <Linkpage />
       </div>
 
       <div

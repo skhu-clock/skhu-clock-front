@@ -2,11 +2,10 @@ import { CSSProperties } from 'react';
 import links from '../constants/links';
 import Baselink from '../Baselink';
 import { getFullYmdStr } from '../../hooks/useTime';
-import { MenuAPi } from '@/types';
 import DDay from '../DDay';
 import CurTime from '../CurTime';
 
-const Linkpage = ({randomMenu}:{randomMenu:MenuAPi}) => {
+const Linkpage = () => {
 
   return (
     <div style={basicStyle}>
@@ -17,10 +16,7 @@ const Linkpage = ({randomMenu}:{randomMenu:MenuAPi}) => {
         23년 2학기 종강까지
       </span>
       <DDay />
-
-      <span style={MenuStyle}>
-      🤗 오늘은 {randomMenu.name} 어떠신가요?
-      </span>
+      <div></div>
       <div style={linklistStyle}>
         {links.map(({ item }) => (
           // eslint-disable-next-line react/jsx-key

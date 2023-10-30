@@ -64,7 +64,7 @@ const SubwayList = () => {
         }}
       >
         {subwayData.map((item, index) => (
-          <EverySubwayLine key={index}>
+          <EverySubwayLine key={index} line = {item.subwayId}>
             <LineColor line={item.subwayId}>{`${item.subwayId}`}</LineColor>
             <Lineway>{item.updnLine}</Lineway>
             <ul
@@ -72,6 +72,7 @@ const SubwayList = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '0.5rem',
+
               }}
             >
               {item.subway.map((subwayInfo, subwayIndex) => (
@@ -101,8 +102,18 @@ const SubwayList = () => {
 
 export default SubwayList;
 
-const EverySubwayLine = styled.li`
-  width: 6rem;
+const EverySubwayLine = styled.li<{ line : string}>`
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 12.7rem;
+  height: 8rem;
+
+  padding-top: 1rem;
+
+  border-radius: 1rem;
+  background-color: ${(props) => (props.line === '1호선' ? '#0052A4' : '#747F00')};
 `;
 
 const ButtonLists = styled.div`
@@ -117,12 +128,13 @@ const ButtonLists = styled.div`
 
 const LineColor = styled.h2<{ line: string }>`
   font-weight: 700;
-  color: ${(props) => (props.line === '1호선' ? '#0052A4' : '#747F00')};
+  color: black;
 `;
 
 const Lineway = styled.p`
-  width: 5rem;
   font-weight: 700;
-  text-align: left;
+  text-align: center;
+  width: 80%;
   margin-bottom: 0.5rem;
+  border-bottom: 1px solid white;
 `;

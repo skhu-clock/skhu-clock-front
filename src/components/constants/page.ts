@@ -38,7 +38,7 @@ const page: Page[] = [
   {
     item: {
       title: '다음지하철',
-      subtitle: '지하철을 확인할 수 있습니다.',
+      subtitle: '',
       innerContent: SubwayList,
     },
   },

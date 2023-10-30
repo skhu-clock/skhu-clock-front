@@ -21,9 +21,8 @@ export default function Home({menu}:{menu:MenuAPi[]}) {
   const element1 = useRef<HTMLDivElement>(null);
   const element2 = useRef<HTMLDivElement>(null);
   const element3 = useRef<HTMLDivElement>(null);
-  const element4 = useRef<HTMLDivElement>(null);
   // 쌉쌉 하드코디리디리디링한 useRef 배열로 묶어버리기~
-  const eleArr = [element, element1, element2,element3,element4];
+  const eleArr = [element, element1, element2,element3];
 
   // 원하는 div로 이동하는 함수우미양가
   const onMoveToElement = (index: number) => {
@@ -40,8 +39,8 @@ export default function Home({menu}:{menu:MenuAPi[]}) {
   const onHandelWheel = (e: WheelEvent<HTMLDivElement>) => {
     if (e.deltaY > 0) {
       // 휠을 아래로 스크롤할 때
-      onMoveToElement(Math.min(currentScroll + 1, 4));
-      setCurrentScroll(Math.min(currentScroll + 1, 4));
+      onMoveToElement(Math.min(currentScroll + 1, 3));
+      setCurrentScroll(Math.min(currentScroll + 1, 3));
     } else {
       // 휠을 위로 스크롤할 때
       onMoveToElement(Math.max(currentScroll - 1, 0));
@@ -85,11 +84,7 @@ export default function Home({menu}:{menu:MenuAPi[]}) {
         </div>
       </div>
 
-      <div ref={eleArr[2]} style={callenderStyles} onWheel={onHandelWheelDebounced}>
-        <BaseCalendar />
-      </div>
-
-      <div ref={eleArr[3]} style={callenderStyles} onWheel={onHandelWheelDebounced}>
+      <div ref={eleArr[2]} style={contantsDivStyles} onWheel={onHandelWheelDebounced}>
         <div style={contantsStyles}>
           {PAGE.page.map(({ item }) => (
             <BaseItem
@@ -105,7 +100,7 @@ export default function Home({menu}:{menu:MenuAPi[]}) {
         </div>
       </div>
 
-      <div style={contantsDivStyles} ref={eleArr[4]} onWheel={onHandelWheelDebounced}>
+      <div style={contantsDivStyles} ref={eleArr[3]} onWheel={onHandelWheelDebounced}>
         <div style={contantsStyles}>
           {PAGE.lastPage.map(({ item }) => (
             <BaseItem

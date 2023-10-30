@@ -111,7 +111,7 @@ body {
   background-image: url('/background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: , sans-serif;
+  font-family: sans-serif;
 }
 ol,
 ul {
@@ -143,4 +143,17 @@ table {
   &:hover {
     font-weight: 700;
   }
+}
+
+.calendar {
+  width: 200px;
+  height: 200px;
+}
+
+.react-calendar__month-view__days__day {
+  font-size: 0.6em; /* 텍스트 크기 줄이기 */
+}
+
+.react-calendar__tile {
+  padding: 0.5em 0.1em; /* 셀 패딩 줄이기 */
 }

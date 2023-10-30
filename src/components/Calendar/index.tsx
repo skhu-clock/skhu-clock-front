@@ -3,6 +3,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import type { Schedule } from '@/types';
 import ApiList from '../Domain/ApiList';
+import { styled } from '@mui/material';
 
 type ValuePiece = Date | null;
 
@@ -12,8 +13,8 @@ const RenderCalenDarItem = (schedule: Schedule) => {
   return (
     <div
       style={{
-        width: '12rem',
-        height: '5rem',
+        width: '40rem',
+        height: '3rem',
       }}
     >
       <p style={{ fontWeight: 'bold' }}>{schedule.date}</p>
@@ -58,37 +59,41 @@ const BaseCalendar = () => {
   }, []);
 
   return (
-    <div style={calenderWarpper}>
-      <section style={sectionStyle}>
-        <h1 style={h1Style}>달력</h1>
-        <h2 style={h2Style}>해당 달의 달력을 보여드립니다.</h2>
+    <div style={calTextWarpper}>
+      <div style={calenderWarpper}>
         <div style={calednerCenter}>
-          <Calendar onChange={onChange} value={value} />
+          <StyleCalendar onChange={onChange} value={value} />
         </div>
-      </section>
-      <section style={sectionStyle}>
-        <h1 style={h1Style}>학사일정</h1>
-        <h2 style={h2Style}>이번 달 학사일정 세부내용을 보여드립니다.</h2>
-        <div style={innerContentDiv}>
-          <ApiList
-            items={schedule as Schedule[]}
-            renderItem={RenderCalenDarItem}
-          />
-        </div>
-      </section>
+      </div>
+      <div style={innerContentDiv}>
+        <ApiList
+          items={schedule as Schedule[]}
+          renderItem={RenderCalenDarItem}
+        />
+      </div>
     </div>
   );
 };
 export default BaseCalendar;
 
-const calenderWarpper: CSSProperties = {
+const calTextWarpper: CSSProperties = {
   display: 'flex',
-  justifyContent: 'center',
+  justifyContent: 'flx-start',
   alignItems: 'center',
   flexDirection: 'row',
-  width: '100%',
-  height: '100%',
+};
+
+const calenderWarpper: CSSProperties = {
+  display: 'flex',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+  flexDirection: 'row',
+  width: '14rem',
+  height: '50%',
   gap: '1rem',
+
+  paddingRight: '2rem',
+  paddingBottom: '1rem',
 };
 
 const calednerCenter: CSSProperties = {
@@ -97,43 +102,93 @@ const calednerCenter: CSSProperties = {
   alignItems: 'center',
 
   width: '100%',
-  height: '100%',
-};
-
-const sectionStyle: CSSProperties = {
-  fontWeight: 'normal',
-  fontStyle: 'normal',
-  width: '30rem',
-  height: '30rem',
-  display: 'flex',
-  justifyContent: 'space-around',
-  flexDirection: 'column',
-  minHeight: '17rem',
-  backgroundColor: 'rgba(255,255,255,0.56)',
-  color: 'black',
-};
-
-const h1Style: CSSProperties = {
-  backgroundColor: 'white',
-  color: 'black',
-  fontWeight: '700',
-  fontSize: '1.4rem',
-  paddingLeft: '0.5rem',
-  paddingBottom: '0.5rem',
-};
-
-const h2Style: CSSProperties = {
-  fontSize: '1.2rem',
-  padding: '0.625rem',
-  fontWeight: 'bold',
+  height: '50%',
 };
 
 const innerContentDiv: CSSProperties = {
-  background: 'rgba(255,255,255,0.8)',
   display: 'flex',
-  width: '95%',
-  margin: '1.25rem auto',
-  borderRadius: '1rem',
   justifyContent: 'center',
+  width: '95%',
+  borderRadius: '1rem',
   flex: 1,
+  paddingBottom: '2rem',
+
 };
+
+// react-calendar 스타일
+const StyleCalendar = styled(Calendar)`
+  width: 100px;
+  border: none;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 25px;
+
+  .react-calendar__navigation {
+    display: flex;
+    height: 24px;
+    margin-bottom: 1em;
+  }
+
+  .react-calendar__navigation button {
+    min-width: 24px;
+    background-color: none;
+  }
+
+  .react-calendar__navigation button:disabled {
+    background-color: #e8e8e8;
+  }
+
+  .react-calendar__navigation button:enabled:hover,
+  .react-calendar__navigation button:enabled:focus {
+    background-color: #e8e8e8;
+    border-radius: 7px;
+  }
+
+  /* 일별 텍스트사이즈 */
+  .react-calendar__month-view__days__day {
+    font-size: 0.6rem;
+  }
+
+  .react-calendar__month-view__weekdays {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.625rem;
+  }
+
+  .react-calendar__year-view .react-calendar__tile,
+  .react-calendar__decade-view .react-calendar__tile,
+  .react-calendar__century-view .react-calendar__tile {
+    padding: 1.2em 0.5em;
+  }
+
+  /* 일별 셀 패딩 */
+  .react-calendar__tile {
+    padding: 0.1rem;
+    border-radius: 7px;
+  }
+
+  .react-calendar__tile--hasActive {
+    color: #ffffff;
+    background-color: #797979;
+    border-radius: 7px;
+  }
+
+  .react-calendar__tile--hasActive:enabled:hover,
+  .react-calendar__tile--hasActive:enabled:focus {
+    background-color: #797979;
+    border-radius: 7px;
+  }
+
+  .react-calendar__tile--active {
+    color: #ffffff;
+    background-color: #6a6a6a;
+    border-radius: 7px;
+  }
+
+  .react-calendar__tile--active:enabled:hover,
+  .react-calendar__tile--active:enabled:focus {
+    background-color: #6a6a6a;
+    border-radius: 7px;
+  }
+`;

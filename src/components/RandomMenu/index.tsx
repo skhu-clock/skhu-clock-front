@@ -28,36 +28,74 @@ const RandonMenu = () => {
 
   return (
     <div style={randWapper}>
-      {randomMenu && (
-        <span style={MenuStyle}>🤗 오늘은 {randomMenu.name} 어떠신가요?</span>
-      )}
-      <button style={ButtonStyle} onClick={selectRandomMenu}>
-        랜덤 메뉴 선택
-      </button>
+      <h1 style={h1Style}>국수나무 메뉴 추천</h1>
+      <div style={MenuDivStyle}>
+        {randomMenu && (
+          <span style={MenuStyle}>🤗 오늘은 <span style={MenuSpanStyle}>{randomMenu.name}</span> 어떠신가요?</span>
+        )}
+        <button style={ButtonStyle} onClick={selectRandomMenu}>
+          다른 메뉴 선택
+        </button>
+      </div>
     </div>
   );
 };
 
 export default RandonMenu;
 const randWapper: CSSProperties = {
-  width: '50%',
+  display: 'flex',
+  flexDirection: 'column',
+  fontWeight: 'normal',
+  fontStyle: 'normal',
+  width: '29rem',
+  height: '18.75rem',
+  minHeight: '17rem',
+  backgroundColor: 'rgba(255,255,255,0.56)',
+  color: 'black',
+
+  borderRadius: '2rem',
 };
 
-const MenuStyle: CSSProperties = {
-  fontSize: '1.3rem',
-  color: 'white',
-  textShadow: '0 0 10px rgba(0,0,0,0.8)',
+const h1Style: CSSProperties = {
+  color: 'black',
+  fontSize: '2rem',
   fontWeight: '700',
+
+  paddingTop: '2rem',
+  paddingLeft: '2rem',
 };
 
 const ButtonStyle: CSSProperties = {
   all: 'unset',
   cursor: 'pointer',
-  width: '12rem',
-  height: '3rem',
-  border: '1px solid black',
-  borderRadius: '1.5rem',
+  width: '20rem',
+  height: '2rem',
+  borderRadius: 'rem',
   textAlign: 'center',
 
-  backgroundColor: 'white',
+  backgroundColor: 'rgba(255,255,255,0.56)',
+  
+};
+
+const MenuDivStyle: CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  
+  width: '100%',
+  height: '100%',
+
+  gap: '2rem',
+};
+
+const MenuStyle: CSSProperties = {
+  fontSize: '1.7rem',
+  color: 'white',
+  textShadow: '0 0 10px rgba(0,0,0,0.8)',
+  fontWeight: '700',
+};
+
+const MenuSpanStyle: CSSProperties = {
+  color: 'beige',
 };

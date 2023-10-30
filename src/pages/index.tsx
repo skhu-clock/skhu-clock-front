@@ -119,7 +119,7 @@ export default function Home({ menu }: { menu: MenuAPi[] }) {
       >
         <div style={contantsStyles}>
           <MenuList />
-          <div>
+          <div style={lastDivStyles}>
             <RandonMenu />
             <RestaruarntList />
           </div>
@@ -163,4 +163,12 @@ const contantsStyles: CSSProperties = {
   maxWidth: '80%',
   animation: 'fadeIn 1s linear',
   zIndex: 1,
+};
+
+const lastDivStyles: CSSProperties = {
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '2rem',
 };

@@ -1,4 +1,4 @@
-import { Devonshire } from 'next/font/google';
+import { CSSProperties } from 'react';
 import { useEffect, useState } from 'react';
 
 const DDay = () => {
@@ -43,17 +43,26 @@ const DDay = () => {
         } else {
           setMinute(minute - 1);
           setSecond(59);
-        } 
+        }
       }
     }, 1000);
     return () => clearInterval(timer);
   }, [day, hour, minute, second]);
 
   return (
-    <div>
-      {day} : {hour} : {minute} : {second}
+    <div style={DdayStyle}>
+      {day.toString().padStart(2, '0')}일 {hour.toString().padStart(2, '0')}시{' '}
+      {minute.toString().padStart(2, '0')}분{' '}
+      {second.toString().padStart(2, '0')}초
     </div>
   );
 };
 
 export default DDay;
+
+const DdayStyle: CSSProperties = {
+  fontSize: '3rem',
+  color: 'red',
+  textShadow: '0 0 10px rgba(0,0,0,0.8)',
+  fontWeight: '700',
+};

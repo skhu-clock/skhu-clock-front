@@ -82,7 +82,7 @@ const MenuDivStyle: CSSProperties = {
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  
+  color:'black',
   width: '100%',
   height: '100%',
 
@@ -91,7 +91,7 @@ const MenuDivStyle: CSSProperties = {
 
 const MenuStyle: CSSProperties = {
   fontSize: '1.7rem',
-  color: 'white',
+  color: 'black',
   textShadow: '0 0 10px rgba(0,0,0,0.8)',
   fontWeight: '700',
 };

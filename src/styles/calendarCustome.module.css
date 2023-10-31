@@ -1,7 +1,6 @@
 .react-calendar {
   width: 200px;
   height: 200px;
-  background-color: aqua;
 }
 
 .react-calendar__month-view__days__day {

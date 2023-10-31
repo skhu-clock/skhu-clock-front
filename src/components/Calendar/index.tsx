@@ -117,11 +117,12 @@ const innerContentDiv: CSSProperties = {
 
 // react-calendar 스타일
 const StyleCalendar = styled(Calendar)`
-  width: 100px;
+  width: 250px;
   border: none;
   margin-bottom: 15px;
   padding: 10px;
   border-radius: 25px;
+  background:white;
 
   .react-calendar__navigation {
     display: flex;

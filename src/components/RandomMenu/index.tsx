@@ -10,7 +10,7 @@ const RandonMenu = () => {
     async function fetchMenuData() {
       try {
         const response = await axios.get<MenuAPi[]>(
-          'http://skhuclock.duckdns.org/api/menus'
+          'https://skhu-clock-front.vercel.app/api/menu'
         );
         setMenuList(response.data); // API의 응답 형태에 따라 적절하게 수정하세요.
       } catch (error) {
